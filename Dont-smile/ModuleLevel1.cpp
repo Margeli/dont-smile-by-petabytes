@@ -21,21 +21,21 @@ ModuleLevel1::ModuleLevel1()
 {
 
 	// foreground
-	foreground.x = 352;
-	foreground.y = 134;
-	foreground.w = 351;
-	foreground.h = 2836;
+	foreground.x = 0;
+	foreground.y = 0;
+	foreground.w = 0;
+	foreground.h = 0;
 
 	// Background / sky
-	background.x = 0;
-	background.y = 134;
-	background.w = 351;
-	background.h = 3265;
+	background.x = 789;
+	background.y = 9600-SCREEN_HEIGHT;
+	background.w = 3500;
+	background.h =9600;
 
-	ship_launcher.x = 352;
-	ship_launcher.y = 2971;
-	ship_launcher.w = 351;
-	ship_launcher.h = 429;
+	ship_launcher.x = 0;
+	ship_launcher.y = 0;
+	ship_launcher.w = 0;
+	ship_launcher.h = 0;
 
 	
 }
@@ -96,7 +96,7 @@ bool ModuleLevel1::Start()
 	}
 	App->audio->Play_Music(music_lvl1);
 	
-	graphics = App->textures->Load("Assets/Images/lvl1_tilemap.png");
+	graphics = App->textures->Load("Assets/Images/map.png");
 	
 	
 	return true;
@@ -135,11 +135,9 @@ update_status ModuleLevel1::Update()
 	// Draw everything --------------------------------------
 
 	
-	App->render->Blit(graphics, -50, -2965, &background); 
+	App->render->Blit(graphics, 0, 0, &background); 
 
-	App->render->Blit(graphics, -50, -2965, &foreground);
 	
-	App->render->Blit(graphics, -50, -150, &ship_launcher, 1.8f);
 
 
 	if (App->player->position.y <= -2735) {
