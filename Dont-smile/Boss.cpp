@@ -11,7 +11,7 @@
 #include "ModuleRender.h"
 #include "ModuleFadeToBlack.h"
 #include "ModuleLevel1.h"
-
+#include "ModuleStageCompleted.h"
 
 
 #include "SDL/include/SDL_timer.h"
@@ -133,9 +133,9 @@ void Boss::OnCollision(Collider*collider, int num_enemy) {
 		hits_life -= App->player->hit_dmg;
 	}
 
-	//else if ((App->player2->IsEnabled()) && (collider->type == COLLIDER_PLAYER2_SHOT)) {
-	//	hits_life -= App->player2->hit_dmg;
-	//}
+	else if ((App->player2->IsEnabled()) && (collider->type == COLLIDER_PLAYER2_SHOT)) {
+		hits_life -= App->player2->hit_dmg;
+	}
 
 	else if (collider->type == COLLIDER_BOMB || collider->type == COLLIDER_BOMB2) {
 		hits_life -= App->player->bomb_dmg;
@@ -152,9 +152,9 @@ void Boss::Dead(Collider* shooter, int num_enemy) {
 	if (shooter->type == COLLIDER_PLAYER_SHOT || shooter->type == COLLIDER_BOMB) {
 		App->player->score += score_points;
 	}
-	//else if (shooter->type == COLLIDER_PLAYER2_SHOT || shooter->type == COLLIDER_BOMB2) {
-	//	App->player2->score += score_points;
-	//}
+	else if (shooter->type == COLLIDER_PLAYER2_SHOT || shooter->type == COLLIDER_BOMB2) {
+		App->player2->score += score_points;
+	}
 
 	App->particles->AddParticle(explosion, position.x - 6, position.y - 5, COLLIDER_EXPLOSION);
 
@@ -166,7 +166,7 @@ void Boss::Dead(Collider* shooter, int num_enemy) {
 	delete App->enemies->enemies[num_enemy];
 	App->enemies->enemies[num_enemy] = nullptr;
 	
-
+	App->fade->FadeToBlack(App->level1, App->stageCompleted);
 
 
 }

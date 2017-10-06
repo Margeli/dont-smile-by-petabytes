@@ -2,7 +2,7 @@
 #define __ModuleEnemies_H__
 
 #include "Module.h"
-#include "Bacteria.h"
+#include "BonusSpaceship.h"
 #include "ModuleParticles.h"
 #include "GreenShooterSpaceship.h"
 #include "LightShooterSpaceship.h"
@@ -13,11 +13,11 @@
 enum ENEMY_TYPES
 {
 	NO_TYPE,
-	BACTERIA,
+	BONUS_SPACESHIP,
 	GREENSHOOTER_SPACESHIP,
 	LIGHTSHOOTER_SPACESHIP,
+	MINE,
 	HEAVY_SHOOTER,
-	SINUS,
 	TANK,
 	CANNON_TANK,
 	MEGA_TANK,
@@ -26,7 +26,7 @@ enum ENEMY_TYPES
 	BOSS2,
 	BOSS_CANNON,
 	BOSS_CANNON2,
-	PELITO
+	BOX
 };
 
 class Enemy;

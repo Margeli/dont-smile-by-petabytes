@@ -10,10 +10,7 @@
 struct SDL_Texture;
 struct Collider;
 
-struct vector2 {
-	float y = 0;
-	float x = 0;
-};
+
 
 class ModulePlayer : public Module
 {
@@ -24,8 +21,8 @@ public:
 	bool Start();
 	update_status Update();
 	bool CleanUp();
-	//void OnCollision(Collider* c1, Collider* c2);
-	//void Dead();
+	void OnCollision(Collider* c1, Collider* c2);
+	void Dead();
 
 public:
 
@@ -89,16 +86,6 @@ public:
 	uint Blue_Powerup_Lvl;
 	uint M_Powerup_Lvl;
 
-
-	//coses de la inercia
-	int speed = 3;
-
-	vector2 speed_vec = { 0,0 };
-	vector2 inertia_vec = { 0,0 };
-	float direction = M_PI;
-
-	void shoot();
-	void updatePosition();
 	
 	
 	Mix_Chunk* fx_shoot = nullptr;
