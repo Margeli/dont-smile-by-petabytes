@@ -64,22 +64,22 @@ void Box::OnCollision(Collider*collider, int num_enemy) {
 	if(collider->type == COLLIDER_PLAYER_SHOT) {
 		hits_life -= App->player->hit_dmg;
 	}
-	else if ((App->player2->IsEnabled()) && (collider->type == COLLIDER_PLAYER2_SHOT)) {
-		hits_life -= App->player2->hit_dmg;
+	//else if ((App->player2->IsEnabled()) && (collider->type == COLLIDER_PLAYER2_SHOT)) {
+	//	hits_life -= App->player2->hit_dmg;
 
-	}
+	//}
 	else if (collider->type == COLLIDER_BOMB|| collider->type == COLLIDER_BOMB2) {
 		hits_life -= App->player->bomb_dmg;
 	}
 	if (hits_life <= 0) {
 		int random_number = rand()%100;
-		if (random_number <5 ) {//5% of chances to drop dragon
-			App->powerup->AddPowerUp(POWERUP_DRAGON, position.x + 4, position.y + 4);
-		}
+		//if (random_number <5 ) {//5% of chances to drop dragon
+		//	App->powerup->AddPowerUp(POWERUP_DRAGON, position.x + 4, position.y + 4);
+		//}
 
-		else {//95% of chances to drop the medal
-			App->powerup->AddPowerUp(POWERUP_MEDAL,position.x+4, position.y+4);
-		}
+		//else {//95% of chances to drop the medal
+		//	App->powerup->AddPowerUp(POWERUP_MEDAL,position.x+4, position.y+4);
+		//}
 		App->particles->AddParticle(explosion, position.x+2, position.y+2, COLLIDER_EXPLOSION);
 		delete App->enemies->enemies[num_enemy];
 		App->enemies->enemies[num_enemy] = nullptr;

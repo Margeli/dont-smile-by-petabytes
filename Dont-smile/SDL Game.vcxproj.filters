@@ -53,22 +53,13 @@
     <ClInclude Include="ModuleFadeToBlack.h">
       <Filter>Modules</Filter>
     </ClInclude>
-    <ClInclude Include="ModuleLevel2.h">
-      <Filter>Modules</Filter>
-    </ClInclude>
     <ClInclude Include="ModuleLevel1.h">
-      <Filter>Modules</Filter>
-    </ClInclude>
-    <ClInclude Include="ModuleIntro.h">
       <Filter>Modules</Filter>
     </ClInclude>
     <ClInclude Include="ModuleAudio.h">
       <Filter>Modules</Filter>
     </ClInclude>
     <ClInclude Include="ModuleParticles.h">
-      <Filter>Modules</Filter>
-    </ClInclude>
-    <ClInclude Include="ModuleStageCompleted.h">
       <Filter>Modules</Filter>
     </ClInclude>
     <ClInclude Include="ModuleCollision.h">
@@ -83,20 +74,11 @@
     <ClInclude Include="BonusSpaceship.h">
       <Filter>Modules\Enemies</Filter>
     </ClInclude>
-    <ClInclude Include="ModulePlayer2.h">
-      <Filter>Modules</Filter>
-    </ClInclude>
     <ClInclude Include="GreenShooterSpaceship.h">
       <Filter>Modules\Enemies</Filter>
     </ClInclude>
     <ClInclude Include="LightShooterSpaceship.h">
       <Filter>Modules\Enemies</Filter>
-    </ClInclude>
-    <ClInclude Include="ModuleFonts.h">
-      <Filter>Modules</Filter>
-    </ClInclude>
-    <ClInclude Include="ModulePowerUps.h">
-      <Filter>Modules</Filter>
     </ClInclude>
     <ClInclude Include="Path.h">
       <Filter>Containers</Filter>
@@ -163,22 +145,13 @@
     <ClCompile Include="ModuleFadeToBlack.cpp">
       <Filter>Modules</Filter>
     </ClCompile>
-    <ClCompile Include="ModuleLevel2.cpp">
-      <Filter>Modules</Filter>
-    </ClCompile>
     <ClCompile Include="ModuleLevel1.cpp">
-      <Filter>Modules</Filter>
-    </ClCompile>
-    <ClCompile Include="ModuleIntro.cpp">
       <Filter>Modules</Filter>
     </ClCompile>
     <ClCompile Include="ModuleAudio.cpp">
       <Filter>Modules</Filter>
     </ClCompile>
     <ClCompile Include="ModuleParticles.cpp">
-      <Filter>Modules</Filter>
-    </ClCompile>
-    <ClCompile Include="ModuleStageCompleted.cpp">
       <Filter>Modules</Filter>
     </ClCompile>
     <ClCompile Include="ModuleCollision.cpp">
@@ -193,20 +166,11 @@
     <ClCompile Include="BonusSpaceship.cpp">
       <Filter>Modules\Enemies</Filter>
     </ClCompile>
-    <ClCompile Include="ModulePlayer2.cpp">
-      <Filter>Modules</Filter>
-    </ClCompile>
     <ClCompile Include="GreenShooterSpaceship.cpp">
       <Filter>Modules\Enemies</Filter>
     </ClCompile>
     <ClCompile Include="LightShooterSpaceship.cpp">
       <Filter>Modules\Enemies</Filter>
-    </ClCompile>
-    <ClCompile Include="ModuleFonts.cpp">
-      <Filter>Modules</Filter>
-    </ClCompile>
-    <ClCompile Include="ModulePowerUps.cpp">
-      <Filter>Modules</Filter>
     </ClCompile>
     <ClCompile Include="Mine.cpp">
       <Filter>Modules\Enemies</Filter>

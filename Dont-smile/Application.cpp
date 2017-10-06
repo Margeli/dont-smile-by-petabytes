@@ -11,7 +11,7 @@
 #include "ModuleIntro.h"
 #include "ModuleAudio.h"
 #include "ModuleParticles.h"
-#include "ModuleStageCompleted.h"
+
 #include "ModuleCollision.h"
 #include "ModuleEnemies.h"
 #include "ModuleFonts.h"
@@ -26,18 +26,18 @@ Application::Application()
 	modules[i++] = input = new ModuleInput();
 	modules[i++] = textures = new ModuleTextures();
 	modules[i++] = audio = new ModuleAudio();
-	modules[i++] = level2 = new ModuleLevel2();
+	//modules[i++] = level2 = new ModuleLevel2();
 	modules[i++] = level1 = new ModuleLevel1();
 	modules[i++] = enemies = new ModuleEnemies();
 	modules[i++] = player = new ModulePlayer();
-	modules[i++] = player2 = new ModulePlayer2();
+	//modules[i++] = player2 = new ModulePlayer2();
 	modules[i++] = fade = new ModuleFadeToBlack();
-	modules[i++] = intro = new ModuleIntro();	
+	//modules[i++] = intro = new ModuleIntro();	
 	modules[i++] = particles = new ModuleParticles();
-	modules[i++] = stageCompleted = new ModuleStageCompleted();
+	
 	modules[i++] = collision = new ModuleCollision();
-	modules[i++] = fonts = new ModuleFonts();
-	modules[i++] = powerup = new ModulePowerUps();
+	//modules[i++] = fonts = new ModuleFonts();
+	//m/odules[i++] = powerup = new ModulePowerUps();
 	
 }	
 
@@ -53,9 +53,9 @@ bool Application::Init()
 
 	// Deactivate modules here ----
 	//player->Disable();
-	level2->Disable();
-	level1->Disable();
-	stageCompleted->Disable();
+	//level2->Disable();
+	level1->Enable();
+	
 	// ----------------------------
 
 	for(int i = 0; i < NUM_MODULES && ret == true; ++i)

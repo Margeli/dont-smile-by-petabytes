@@ -10,7 +10,7 @@
 #include "ModuleCollision.h"
 #include "ModuleAudio.h"
 #include "ModuleFonts.h"
-#include "ModuleStageCompleted.h"
+
 #include "ModuleLevel1.h"
 
 #include<stdio.h>
@@ -504,11 +504,6 @@ update_status ModulePlayer2::Update()
 		high_score = score;
 
 	
-
-
-	sprintf_s(score_text, 10, "%8d", score);
-	
-	App->fonts->BlitText(143, 10,App->player->yellow_font_score, score_text);
 	
 	return UPDATE_CONTINUE;
 	}

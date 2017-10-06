@@ -183,9 +183,9 @@ void LightShooter_Spaceship::OnCollision(Collider*collider, int num_enemy) {
 		hits_life -= App->player->hit_dmg;		
 	}
 
-	else if ((App->player2->IsEnabled()) && (collider->type == COLLIDER_PLAYER2_SHOT)) {
-		hits_life -= App->player2->hit_dmg;
-	}
+	//else if ((App->player2->IsEnabled()) && (collider->type == COLLIDER_PLAYER2_SHOT)) {
+	//	hits_life -= App->player2->hit_dmg;
+	//}
 
 	else if (collider->type == COLLIDER_BOMB || collider->type == COLLIDER_BOMB2) {
 		hits_life -= App->player->bomb_dmg;			
@@ -201,9 +201,9 @@ void LightShooter_Spaceship::Dead(Collider* shooter, int num_enemy) {
 	if (shooter->type == COLLIDER_PLAYER_SHOT || shooter->type == COLLIDER_BOMB) {
 		App->player->score += score_points;
 	}
-	else if (shooter->type == COLLIDER_PLAYER2_SHOT || shooter->type == COLLIDER_BOMB2) {
-		App->player2->score += score_points;
-	}
+	//else if (shooter->type == COLLIDER_PLAYER2_SHOT || shooter->type == COLLIDER_BOMB2) {
+	//	App->player2->score += score_points;
+	//}
 
 	App->particles->AddParticle(explosion, position.x, position.y, COLLIDER_EXPLOSION);
 	fx_shoot = App->audio->Load_Fx("Assets/Audio/Fx_SmallSpaceship_Explosion.wav");

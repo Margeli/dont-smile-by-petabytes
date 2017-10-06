@@ -85,10 +85,10 @@ void Mine::OnCollision(Collider*collider, int num_enemy) {
 		hits_life -= App->player->hit_dmg;		
 	}
 
-	else if ((App->player2->IsEnabled()) && (collider->type == COLLIDER_PLAYER2_SHOT)) {
+	/*else if ((App->player2->IsEnabled()) && (collider->type == COLLIDER_PLAYER2_SHOT)) {
 		hits_life -= App->player2->hit_dmg;		
 	}
-
+*/
 	else if (collider->type == COLLIDER_BOMB || collider->type == COLLIDER_BOMB2) {
 		hits_life -= App->player->bomb_dmg;		
 		}
@@ -106,7 +106,7 @@ void Mine::Dead(Collider* shooter, int num_enemy) {
 	if (shooter->type == COLLIDER_PLAYER_SHOT || shooter->type == COLLIDER_BOMB) {
 		App->player->score += score_points;
 	}
-	else if (shooter->type == COLLIDER_PLAYER2_SHOT || shooter->type == COLLIDER_BOMB2) {
+	/*else if (shooter->type == COLLIDER_PLAYER2_SHOT || shooter->type == COLLIDER_BOMB2) {
 		App->player2->score += score_points;
 	}
 	ShotVector(color_rotatory_shot, { 2, 1 }, { position.x + 3, position.y + 3 });
@@ -122,7 +122,7 @@ void Mine::Dead(Collider* shooter, int num_enemy) {
 	fx_shoot = App->audio->Load_Fx("Assets/Audio/Fx_SmallSpaceship_Explosion.wav");
 	if (!fx_shoot) {
 		LOG("Error loading shoot's fx: %s", Mix_GetError)
-	}
+	}*/
 	App->audio->Play_Fx(fx_shoot);
 	delete App->enemies->enemies[num_enemy];
 	App->enemies->enemies[num_enemy] = nullptr;
