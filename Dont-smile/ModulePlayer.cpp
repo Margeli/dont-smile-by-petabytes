@@ -115,14 +115,46 @@ void ModulePlayer::updatePosition()
 	
 }
 
+void ModulePlayer::applyInertia()
+{
+	if (speed_vec.y > 0 && speed_vec.y < friction) {
+		speed_vec.y = 0;
+	}
+	else if (speed_vec.y < 0 && speed_vec.y > friction) {
+		speed_vec.y = 0;
+	}
+	else if (speed_vec.y > 0) {
+		speed_vec.y -= friction;
+	}
+	else if (speed_vec.y < 0) {
+		speed_vec.y += friction;
+	}
+	if (speed_vec.x > 0 && speed_vec.x < friction) {
+		speed_vec.x = 0;
+	}
+	else if (speed_vec.x < 0 && speed_vec.x > friction) {
+		speed_vec.x = 0;
+	}
+	else if (speed_vec.x > 0) {
+		speed_vec.x -= friction;
+	}
+	else if (speed_vec.x < 0) {
+		speed_vec.x += friction;
+	}
+}
+
 // Update: draw background
 update_status ModulePlayer::Update()
 {
 	
 
-
+	applyInertia();
 	if (!App->level1->first_animation) {// not able to move during first animation
-		if (App->input->keyboard[SDL_SCANCODE_S] == KEY_STATE::KEY_REPEAT || App->input->gamepad[1] == KEY_STATE::KEY_REPEAT) //---DOWN
+		if (App->input->keyboard[SDL_SCANCODE_S] == KEY_STATE::KEY_REPEAT && App->input->keyboard[SDL_SCANCODE_W] == KEY_STATE::KEY_REPEAT) {
+			applyInertia();
+			updatePosition();
+		}
+		else if (App->input->keyboard[SDL_SCANCODE_S] == KEY_STATE::KEY_REPEAT || App->input->gamepad[1] == KEY_STATE::KEY_REPEAT) //---DOWN
 		{
 			
 			if (speed_vec.y > -max_speed && speed_vec.y < max_speed)
@@ -138,25 +170,19 @@ update_status ModulePlayer::Update()
 				speed_vec.y += acceleration;
 			updatePosition();
 			//App->render->camera.y -= camera_speed_module;
-
 		}
 		else {
-			if (speed_vec.y > 0 && speed_vec.y < friction) {
-				speed_vec.y = 0;
-			}
-			else if (speed_vec.y < 0 && speed_vec.y > friction) {
-				speed_vec.y = 0;
-			}
-			else if (speed_vec.y > 0) {
-				speed_vec.y -= friction;
-			}
-			else if (speed_vec.y < 0) {
-				speed_vec.y += friction;
-			}
+			applyInertia();
 			updatePosition();
 		}
 
-		if (App->input->keyboard[SDL_SCANCODE_D] == KEY_STATE::KEY_REPEAT || App->input->gamepad[2] == KEY_STATE::KEY_REPEAT)//---RIGHT
+		//HORITZONTAL
+
+		if (App->input->keyboard[SDL_SCANCODE_D] == KEY_STATE::KEY_REPEAT && App->input->keyboard[SDL_SCANCODE_A] == KEY_STATE::KEY_REPEAT) {
+			applyInertia();
+			updatePosition();
+		}
+		else if (App->input->keyboard[SDL_SCANCODE_D] == KEY_STATE::KEY_REPEAT || App->input->gamepad[2] == KEY_STATE::KEY_REPEAT)//---RIGHT
 		{
 			if (speed_vec.x > -max_speed && speed_vec.x < max_speed)
 			speed_vec.x += acceleration;
@@ -172,18 +198,7 @@ update_status ModulePlayer::Update()
 			//App->render->camera.x += 4;
 		}
 		else {
-			if (speed_vec.x > 0 && speed_vec.x < friction) {
-				speed_vec.x = 0;
-			}
-			else if (speed_vec.x < 0 && speed_vec.x > friction) {
-				speed_vec.x = 0;
-			}
-			else if (speed_vec.x > 0) {
-				speed_vec.x -= friction;
-			}
-			else if (speed_vec.x < 0) {
-				speed_vec.x += friction;
-			}
+			applyInertia();
 			updatePosition();
 		}
 
