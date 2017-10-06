@@ -19,6 +19,8 @@ private:
 	void Shot(Particle& shot, iPoint aim_position, fPoint shot_initial_pos);
 
 	float speed;	
+	float iterator = 0;
+	bool to_negative = true;
 	float hits_life;
 	int shoot_number = 0;
 	uint score_points;

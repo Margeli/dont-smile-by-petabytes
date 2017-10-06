@@ -28,7 +28,7 @@ Sinus::Sinus(int x, int y, int shoot_num) : Enemy(x, y)
 	score_points = 180;//180
 	hits_life = 4.0f;
 
-	collider = App->collision->AddCollider({ 0, 0, 30, 30 }, COLLIDER_TYPE::COLLIDER_ENEMY, (Module*)App->enemies);
+	//collider = App->collision->AddCollider({ 0, 0, 30, 30 }, COLLIDER_TYPE::COLLIDER_ENEMY, (Module*)App->enemies);
 
 	original_pos.x = x;
 	original_pos.y = y;
@@ -66,37 +66,31 @@ Sinus::Sinus(int x, int y, int shoot_num) : Enemy(x, y)
 }
 
 void Sinus::Move() {
-	
-		animation = &idle;
-		if (App->player->position.x > position.x) {
-			position.x += 0.3f;
+	speed = 3.0f;
+	if (to_negative) {
+		iterator -= 0.1f;
+		if (iterator == -1.0f) {
+			to_negative = false;
 		}
-		else if (App->player->position.x < position.x) {		
-			position.x -= 0.3f;
-		}
-		position.y += 0.1f;
 	
+	}
+	else {
+		iterator += 0.1f;
+		if (iterator == 1.0f) {
+			to_negative = true;
+		}
+	
+	}
+	animation = &idle;
+		position.y += speed;
+		position.x +=15* sin(iterator);
+
 }
 
 
 void Sinus::OnCollision(Collider*collider, int num_enemy) {
 	
-	if (collider->type == COLLIDER_PLAYER_SHOT) {
-		hits_life -= App->player->hit_dmg;		
-	}
-
-	/*else if ((App->player2->IsEnabled()) && (collider->type == COLLIDER_PLAYER2_SHOT)) {
-		hits_life -= App->player2->hit_dmg;		
-	}
-*/
-	else if (collider->type == COLLIDER_BOMB || collider->type == COLLIDER_BOMB2) {
-		hits_life -= App->player->bomb_dmg;		
-		}
 	
-	if (hits_life <= 0) {
-		Dead(collider, num_enemy);
-	
-	}
 
 }
 
