@@ -28,7 +28,14 @@ ModulePlayer::ModulePlayer()
 
 	//Player image
 
-	idle.PushBack({ 0, 0, 275, 300 });
+	idle.PushBack({ 0, 14, 150, 158 });
+	idle.PushBack({ 151, 14, 150, 158 });
+	idle.PushBack({ 302, 14, 150, 158 });
+	idle.PushBack({ 453, 14, 150, 158 });
+	idle.PushBack({ 604, 14, 150, 158 });
+	idle.PushBack({ 755, 14, 150, 158 });
+	idle.speed = 0.1f;
+
 
 
 }
@@ -90,7 +97,7 @@ bool ModulePlayer::Start()
 	//	}. -> Pcs
 
 	if (spaceship_collider==nullptr)
-	spaceship_collider = App->collision->AddCollider({ 0,0, 24, 26 }, COLLIDER_PLAYER, this);
+	spaceship_collider = App->collision->AddCollider({ 0,0, 145, 150 }, COLLIDER_PLAYER, this);
 
 	total_bombs = 3;
 	bomb_thrown = 0;
@@ -197,7 +204,7 @@ update_status ModulePlayer::Update()
 
 
 		if (spaceship_collider != nullptr)
-			spaceship_collider->SetPos(position.x, position.y);
+			spaceship_collider->SetPos(position.x+5, position.y);
 
 		// Draw everything --------------------------------------
 		App->render->Blit(graphics, position.x, position.y, &(current_animation->GetCurrentFrame()));
