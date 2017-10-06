@@ -1,10 +1,10 @@
-#ifndef __BOX_H__
-#define __BOX_H__
+#ifndef __PELITO_H__
+#define __PELITO_H__
 
 #include "Enemy.h"
 #include "ModuleParticles.h"
 
-class Box : public Enemy
+class Pelito : public Enemy
 {
 private:
 
@@ -20,7 +20,7 @@ private:
 	
 public:
 
-	Box(int x, int y);
+	Pelito(int x, int y);
 	void Move();
 
 
@@ -28,4 +28,4 @@ public:
 
 };
 
-#endif// __BOX_H__
+#endif// __PELITO_H__

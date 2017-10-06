@@ -26,7 +26,7 @@ enum ENEMY_TYPES
 	BOSS2,
 	BOSS_CANNON,
 	BOSS_CANNON2,
-	BOX
+	PELITO
 };
 
 class Enemy;

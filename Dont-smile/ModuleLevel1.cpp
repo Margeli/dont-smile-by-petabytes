@@ -84,6 +84,8 @@ bool ModuleLevel1::Start()
 
 	App->enemies->AddEnemy(BACTERIA, 50, -200);
 
+	App->enemies->AddEnemy(PELITO, 50, -250);
+
 	scroll_speed = 2;
 	
 	LOG("Loading level 1");

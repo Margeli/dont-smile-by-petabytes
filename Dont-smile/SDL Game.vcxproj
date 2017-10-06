@@ -80,7 +80,7 @@
     <ClInclude Include="Boss2.h" />
     <ClInclude Include="BossCannon.h" />
     <ClInclude Include="BossCannon2.h" />
-    <ClInclude Include="Box.h" />
+    <ClInclude Include="Pelito.h" />
     <ClInclude Include="CannonTank.h" />
     <ClInclude Include="Globals.h" />
     <ClInclude Include="Enemy.h" />
@@ -114,7 +114,7 @@
     <ClCompile Include="Boss2.cpp" />
     <ClCompile Include="BossCannon.cpp" />
     <ClCompile Include="BossCannon2.cpp" />
-    <ClCompile Include="Box.cpp" />
+    <ClCompile Include="Pelito.cpp" />
     <ClCompile Include="CannonTank.cpp" />
     <ClCompile Include="Globals.cpp" />
     <ClCompile Include="GreenShooterSpaceship.cpp" />

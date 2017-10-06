@@ -18,7 +18,7 @@
 #include"BossCannon.h"
 #include "Boss2.h"
 #include"BossCannon2.h"
-#include "Box.h"
+#include "Pelito.h"
 
 
 
@@ -205,8 +205,8 @@ void ModuleEnemies::SpawnEnemy(const EnemyInfo& info)
 			enemies[i] = new BossCannon2(info.x, info.y, info.shots);
 			break;
 
-		case ENEMY_TYPES::BOX:
-			enemies[i] = new Box(info.x, info.y);
+		case ENEMY_TYPES::PELITO:
+			enemies[i] = new Pelito(info.x, info.y);
 			break;
 
 		}

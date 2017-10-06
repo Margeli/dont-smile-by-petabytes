@@ -1,5 +1,5 @@
 #include "Application.h"
-#include "Box.h"
+#include "Pelito.h"
 #include "ModuleCollision.h"
 #include "ModuleEnemies.h"
 #include "ModuleParticles.h"
@@ -12,7 +12,7 @@
 #include <stdlib.h>  
 #include <time.h>  
 
-Box::Box(int x, int y) : Enemy(x, y)
+Pelito::Pelito(int x, int y) : Enemy(x, y)
 {
 
 	//explosion  particle animation (2nd row particle spritesheet.)
@@ -57,10 +57,10 @@ Box::Box(int x, int y) : Enemy(x, y)
 	srand(time(NULL));
 }
 
-void Box::Move() {	
+void Pelito::Move() {	
 }
 
-void Box::OnCollision(Collider*collider, int num_enemy) {
+void Pelito::OnCollision(Collider*collider, int num_enemy) {
 	if(collider->type == COLLIDER_PLAYER_SHOT) {
 		hits_life -= App->player->hit_dmg;
 	}
@@ -88,5 +88,5 @@ void Box::OnCollision(Collider*collider, int num_enemy) {
 
 }
 
-void Box::Shot(Particle& shot, iPoint aim_position, fPoint shot_initial_pos) {
+void Pelito::Shot(Particle& shot, iPoint aim_position, fPoint shot_initial_pos) {
 }
