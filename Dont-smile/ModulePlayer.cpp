@@ -66,8 +66,8 @@ bool ModulePlayer::Start()
 	spaceship_speed = 1;
 	
 
-	position.x = 111; //position if there's only 1 player
-	position.y = 150;
+	position.x = 0;// 111; //position if there's only 1 player
+	position.y = 0;//; 150;
 
 
 	//else {
@@ -109,9 +109,9 @@ update_status ModulePlayer::Update()
 		speed_vec.y -= speed;
 		updatePosition();
 		App->render->camera.y += 2;
-		if (-position.y*SCREEN_SIZE > App->render->camera.y) {
-			position.y = -App->render->camera.y / SCREEN_SIZE; //upper player limit. ------->The relation between camera.y and position.y is camera.y=-position.y*SCREEN_SIZE
-		}
+		//if (-position.y*SCREEN_SIZE > App->render->camera.y) {
+		//	position.y = -App->render->camera.y / SCREEN_SIZE; //upper player limit. ------->The relation between camera.y and position.y is camera.y=-position.y*SCREEN_SIZE
+		//}
 
 	}
 		
@@ -120,9 +120,11 @@ update_status ModulePlayer::Update()
 	{
 		speed_vec.y += speed;
 		updatePosition();
-		if ((-(position.y - SCREEN_HEIGHT + 27)*SCREEN_SIZE) < App->render->camera.y) { //lower player limit (27 is height of spaceship)
-			position.y = ((-App->render->camera.y / SCREEN_SIZE) - 27 + SCREEN_HEIGHT);
-		}
+		App->render->camera.y -= 2;
+
+		//if ((-(position.y - SCREEN_HEIGHT + 27)*SCREEN_SIZE) < App->render->camera.y) { //lower player limit (27 is height of spaceship)
+		//	position.y = ((-App->render->camera.y / SCREEN_SIZE) - 27 + SCREEN_HEIGHT);
+		//}
 
 
 	}
@@ -133,12 +135,12 @@ update_status ModulePlayer::Update()
 
 		App->render->camera.x -= 2;
 
-		if (App->render->camera.x <= -154) {//right camera limit
-			App->render->camera.x = -154;
-			if (position.x >= 275) { //right player limit
-				position.x = 275;
-			}
-		}
+		//if (App->render->camera.x <= -154) {//right camera limit
+		//	App->render->camera.x = -154;
+		//	if (position.x >= 275) { //right player limit
+		//		position.x = 275;
+		//	}
+		//}
 	}
 
 	if (App->input->keyboard[SDL_SCANCODE_A] == KEY_STATE::KEY_REPEAT || App->input->gamepad[3] == KEY_STATE::KEY_REPEAT)//---LEFT
@@ -149,12 +151,12 @@ update_status ModulePlayer::Update()
 
 		App->render->camera.x += 2;
 
-		if (App->render->camera.x >= 100) {//left camera limit
-			App->render->camera.x = 100;
-			if (position.x <= -48) { //left player limit
-				position.x = -48;
-			}
-		}
+		//if (App->render->camera.x >= 100) {//left camera limit
+		//	App->render->camera.x = 100;
+		//	if (position.x <= -48) { //left player limit
+		//		position.x = -48;
+		//	}
+		//}
 	}
 		//if (App->input->keyboard[SDL_SCANCODE_SPACE] == KEY_STATE::KEY_DOWN || App->input->gamepad[4] == KEY_STATE::KEY_DOWN)// --SPACE SHOT
 		//{
