@@ -111,6 +111,7 @@ void ModulePlayer::updatePosition()
 {
 	
 	position.x += speed_vec.x;
+	position.y -= speed_vec.y;
 	
 }
 
@@ -121,36 +122,52 @@ update_status ModulePlayer::Update()
 
 
 	if (!App->level1->first_animation) {// not able to move during first animation
-		if (App->input->keyboard[SDL_SCANCODE_W] == KEY_STATE::KEY_REPEAT || App->input->gamepad[0] == KEY_STATE::KEY_REPEAT) //---UP
+		if (App->input->keyboard[SDL_SCANCODE_S] == KEY_STATE::KEY_REPEAT || App->input->gamepad[1] == KEY_STATE::KEY_REPEAT) //---DOWN
 		{
 			
-			position.y -= speed;
+			if (speed_vec.y > -max_speed && speed_vec.y < max_speed)
+				speed_vec.y -= acceleration;
+			updatePosition();
 			//App->render->camera.y += 4;
 
 
 		}
-
-
-		else if (App->input->keyboard[SDL_SCANCODE_S] == KEY_STATE::KEY_REPEAT || App->input->gamepad[1] == KEY_STATE::KEY_REPEAT)//---DOWN
+		else if (App->input->keyboard[SDL_SCANCODE_W] == KEY_STATE::KEY_REPEAT || App->input->gamepad[0] == KEY_STATE::KEY_REPEAT)//---UP
 		{
-			position.y += speed;
-
+			if (speed_vec.y > -max_speed && speed_vec.y < max_speed)
+				speed_vec.y += acceleration;
+			updatePosition();
 			//App->render->camera.y -= camera_speed_module;
 
 		}
+		else {
+			if (speed_vec.y > 0 && speed_vec.y < friction) {
+				speed_vec.y = 0;
+			}
+			else if (speed_vec.y < 0 && speed_vec.y > friction) {
+				speed_vec.y = 0;
+			}
+			else if (speed_vec.y > 0) {
+				speed_vec.y -= friction;
+			}
+			else if (speed_vec.y < 0) {
+				speed_vec.y += friction;
+			}
+			updatePosition();
+		}
+
 		if (App->input->keyboard[SDL_SCANCODE_D] == KEY_STATE::KEY_REPEAT || App->input->gamepad[2] == KEY_STATE::KEY_REPEAT)//---RIGHT
 		{
 			if (speed_vec.x > -max_speed && speed_vec.x < max_speed)
-			speed_vec.x += speed;
+			speed_vec.x += acceleration;
 			updatePosition();
 			//App->render->camera.x -= camera_speed_module;
-
 		}
 		else if (App->input->keyboard[SDL_SCANCODE_A] == KEY_STATE::KEY_REPEAT || App->input->gamepad[3] == KEY_STATE::KEY_REPEAT)//---LEFT
 
 		{
 			if (speed_vec.x > -max_speed && speed_vec.x < max_speed)
-			speed_vec.x -= speed;
+			speed_vec.x -= acceleration;
 			updatePosition();
 			//App->render->camera.x += 4;
 		}

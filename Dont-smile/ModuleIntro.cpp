@@ -114,7 +114,7 @@ update_status ModuleIntro::Update()
 		
 		App->player2->player2=false;
 		
-		App->fade->FadeToBlack(this, App->level1);
+		App->fade->FadeToBlack(this, App->level1, 0.0f);
 		
 	}
 	else if (App->input->keyboard[SDL_SCANCODE_2]) {

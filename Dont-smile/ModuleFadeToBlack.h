@@ -12,7 +12,7 @@ public:
 
 	bool Start();
 	update_status Update();
-	bool FadeToBlack(Module* module_off, Module* module_on, float time = 2.0f);
+	bool FadeToBlack(Module* module_off, Module* module_on, float time = 0.2f);
 	bool IsFading() const;
 	
 

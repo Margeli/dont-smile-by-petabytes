@@ -94,8 +94,8 @@ public:
 
 	void updatePosition();
 
-	const float speed = 0.1f;
-	const float max_speed = 150.0f;
+	const float acceleration = 0.5f;
+	const float max_speed = 5.0f;
 	const float friction = 0.1f;
 
 	int counter = 0;
