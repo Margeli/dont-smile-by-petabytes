@@ -86,9 +86,11 @@ public:
 	uint Blue_Powerup_Lvl;
 	uint M_Powerup_Lvl;
 
-	
+	const int camera_speed_module = 4;
 	
 	Mix_Chunk* fx_shoot = nullptr;
+
+	int speed = 4;
 	
 	
 };

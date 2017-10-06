@@ -28,7 +28,7 @@ ModulePlayer::ModulePlayer()
 
 	//Player image
 
-	idle.PushBack({ 80, 13, 24, 27 });
+	idle.PushBack({ 275, 300, 0, 0 });
 
 
 	//move animation boost
@@ -178,19 +178,14 @@ bool ModulePlayer::Start()
 update_status ModulePlayer::Update()
 {
 	
-	position.y -= spaceship_speed;
-	int speed = 2;
+	
 
 	if (!App->level1->first_animation) {// not able to move during first animation
 		if (App->input->keyboard[SDL_SCANCODE_W] == KEY_STATE::KEY_REPEAT || App->input->gamepad[0] == KEY_STATE::KEY_REPEAT) //---UP
 		{
 			position.y -= speed;
-			//if (-position.y*SCREEN_SIZE > App->render->camera.y) {
-			//	//position.y = -App->render->camera.y / SCREEN_SIZE; //upper player limit. ------->The relation between camera.y and position.y is camera.y=-position.y*SCREEN_SIZE
-			//}
-			App->render->camera.y += 4;
 
-			////NEW
+			App->render->camera.y += 4;
 
 
 		}
@@ -199,22 +194,14 @@ update_status ModulePlayer::Update()
 		if (App->input->keyboard[SDL_SCANCODE_S] == KEY_STATE::KEY_REPEAT || App->input->gamepad[1] == KEY_STATE::KEY_REPEAT)//---DOWN
 		{
 			position.y += speed;
-			//if ((-(position.y - SCREEN_HEIGHT + 27)*SCREEN_SIZE) < App->render->camera.y) { //lower player limit (27 is height of spaceship)
-			//	position.y = ((-App->render->camera.y / SCREEN_SIZE) - 27 + SCREEN_HEIGHT);
-			//}
-			App->render->camera.y -= 4;
+
+			App->render->camera.y -= camera_speed_module;
 
 		}
 		if (App->input->keyboard[SDL_SCANCODE_D] == KEY_STATE::KEY_REPEAT || App->input->gamepad[2] == KEY_STATE::KEY_REPEAT)//---RIGHT
 		{
 			position.x += speed;
-			App->render->camera.x -= 4;
-			if (current_animation != &right)
-			{
-				right.Reset();
-				current_animation = &right;
-				
-			}
+			App->render->camera.x -= camera_speed_module;
 
 		}
 
@@ -223,11 +210,7 @@ update_status ModulePlayer::Update()
 		{
 			position.x -= speed;
 			App->render->camera.x += 4;
-			if (current_animation != &left)
-			{
-				left.Reset();
-				current_animation = &left;				
-			}
+
 
 		}
 		if (App->input->keyboard[SDL_SCANCODE_SPACE] == KEY_STATE::KEY_DOWN || App->input->gamepad[4] == KEY_STATE::KEY_DOWN)// --SPACE SHOT
