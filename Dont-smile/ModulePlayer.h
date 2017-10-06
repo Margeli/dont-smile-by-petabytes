@@ -89,9 +89,16 @@ public:
 	uint Blue_Powerup_Lvl;
 	uint M_Powerup_Lvl;
 
-	float speed = 3;
-	float inertia = 0;
 
+	//coses de la inercia
+	int speed = 3;
+
+	vector2 speed_vec = { 0,0 };
+	vector2 inertia_vec = { 0,0 };
+	float direction = M_PI;
+
+	void shoot();
+	void updatePosition();
 	
 	
 	Mix_Chunk* fx_shoot = nullptr;

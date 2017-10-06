@@ -92,6 +92,12 @@ bool ModulePlayer::Start()
 	return ret;
 }
 
+void ModulePlayer::updatePosition()
+{
+	position.x += speed_vec.x;
+	position.y += speed_vec.y;
+}
+
 // Update: draw background
 update_status ModulePlayer::Update()
 {
@@ -100,7 +106,8 @@ update_status ModulePlayer::Update()
 		
 	if (App->input->keyboard[SDL_SCANCODE_W] == KEY_STATE::KEY_REPEAT || App->input->gamepad[0] == KEY_STATE::KEY_REPEAT) //---UP
 	{
-		position.y -= speed;
+		speed_vec.y -= speed;
+		updatePosition();
 		App->render->camera.y += 2;
 		if (-position.y*SCREEN_SIZE > App->render->camera.y) {
 			position.y = -App->render->camera.y / SCREEN_SIZE; //upper player limit. ------->The relation between camera.y and position.y is camera.y=-position.y*SCREEN_SIZE
@@ -111,7 +118,8 @@ update_status ModulePlayer::Update()
 
 	if (App->input->keyboard[SDL_SCANCODE_S] == KEY_STATE::KEY_REPEAT || App->input->gamepad[1] == KEY_STATE::KEY_REPEAT)//---DOWN
 	{
-		position.y += speed;
+		speed_vec.y += speed;
+		updatePosition();
 		if ((-(position.y - SCREEN_HEIGHT + 27)*SCREEN_SIZE) < App->render->camera.y) { //lower player limit (27 is height of spaceship)
 			position.y = ((-App->render->camera.y / SCREEN_SIZE) - 27 + SCREEN_HEIGHT);
 		}
@@ -120,7 +128,9 @@ update_status ModulePlayer::Update()
 	}
 	if (App->input->keyboard[SDL_SCANCODE_D] == KEY_STATE::KEY_REPEAT || App->input->gamepad[2] == KEY_STATE::KEY_REPEAT)//---RIGHT
 	{
-		position.x += speed;
+		speed_vec.x += speed;
+		updatePosition();
+
 		App->render->camera.x -= 2;
 
 		if (App->render->camera.x <= -154) {//right camera limit
@@ -134,7 +144,9 @@ update_status ModulePlayer::Update()
 	if (App->input->keyboard[SDL_SCANCODE_A] == KEY_STATE::KEY_REPEAT || App->input->gamepad[3] == KEY_STATE::KEY_REPEAT)//---LEFT
 
 	{
-		position.x -= speed;
+		speed_vec.x -= speed;
+		updatePosition();
+
 		App->render->camera.x += 2;
 
 		if (App->render->camera.x >= 100) {//left camera limit
@@ -149,7 +161,17 @@ update_status ModulePlayer::Update()
 
 		//}
 
-		App->render->Blit(graphics, position.x, position.y, &(current_animation->GetCurrentFrame()));
+	if (speed_vec.x > 0)
+		speed_vec.x--;
+	if (speed_vec.x < 0)
+		speed_vec.x++;
+
+	if (speed_vec.y > 0)
+		speed_vec.y--;
+	if (speed_vec.y < 0)
+		speed_vec.y++;
+
+	App->render->Blit(graphics, position.x, position.y, &(current_animation->GetCurrentFrame()));
 
 
 		return UPDATE_CONTINUE;
@@ -157,6 +179,24 @@ update_status ModulePlayer::Update()
 
 }
 
+
+
+//void ModulePlayer::shoot()
+//{
+//	//direction = aim_to_player();
+//	speed_vec.y = sin(direction);
+//	App->particles->enemy_bullet.speed.x = cos(shoot_direction) * ENEMY_BULLET_SPEED;
+//
+//	//App->particles->AddParticle(App->particles->enemy_bullet, position.x + 11, position.y + 22, COLLIDER_ENEMY_SHOT);
+//
+//	if (shot_current_delay < ENEMY_SHOT_DELAY)
+//		shot_current_delay++;
+//	else {
+//		App->particles->AddParticle(App->particles->enemy_bullet, position.x + 11, position.y + 22, COLLIDER_ENEMY_SHOT);
+//		shot_current_delay = 0;
+//	}
+//
+//}
 
 //void ModulePlayer::OnCollision(Collider* c1, Collider* c2)
 //{

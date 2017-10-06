@@ -89,7 +89,7 @@ bool ModuleLevel1::Start()
 	if (!music_lvl1) {
 	LOG("Error loading lvl1 music: %s",Mix_GetError)
 	}
-	App->audio->Play_Music(music_lvl1);
+	//App->audio->Play_Music(music_lvl1);
 	
 	graphics = App->textures->Load("Assets/Images/lvl1_tilemap.png");
 	
