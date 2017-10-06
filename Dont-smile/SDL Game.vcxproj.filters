@@ -71,9 +71,6 @@
     <ClInclude Include="ModuleEnemies.h">
       <Filter>Modules</Filter>
     </ClInclude>
-    <ClInclude Include="BonusSpaceship.h">
-      <Filter>Modules\Enemies</Filter>
-    </ClInclude>
     <ClInclude Include="GreenShooterSpaceship.h">
       <Filter>Modules\Enemies</Filter>
     </ClInclude>
@@ -101,9 +98,6 @@
     <ClInclude Include="Boss.h">
       <Filter>Modules\Enemies</Filter>
     </ClInclude>
-    <ClInclude Include="Box.h">
-      <Filter>Modules\Enemies</Filter>
-    </ClInclude>
     <ClInclude Include="CannonTank.h">
       <Filter>Modules\Enemies</Filter>
     </ClInclude>
@@ -114,6 +108,12 @@
       <Filter>Modules\Enemies</Filter>
     </ClInclude>
     <ClInclude Include="BossCannon2.h">
+      <Filter>Modules\Enemies</Filter>
+    </ClInclude>
+    <ClInclude Include="Bacteria.h">
+      <Filter>Modules\Enemies</Filter>
+    </ClInclude>
+    <ClInclude Include="Pelito.h">
       <Filter>Modules\Enemies</Filter>
     </ClInclude>
   </ItemGroup>
@@ -163,9 +163,6 @@
     <ClCompile Include="ModuleEnemies.cpp">
       <Filter>Modules</Filter>
     </ClCompile>
-    <ClCompile Include="BonusSpaceship.cpp">
-      <Filter>Modules\Enemies</Filter>
-    </ClCompile>
     <ClCompile Include="GreenShooterSpaceship.cpp">
       <Filter>Modules\Enemies</Filter>
     </ClCompile>
@@ -190,9 +187,6 @@
     <ClCompile Include="Boss.cpp">
       <Filter>Modules\Enemies</Filter>
     </ClCompile>
-    <ClCompile Include="Box.cpp">
-      <Filter>Modules\Enemies</Filter>
-    </ClCompile>
     <ClCompile Include="CannonTank.cpp">
       <Filter>Modules\Enemies</Filter>
     </ClCompile>
@@ -203,6 +197,12 @@
       <Filter>Modules\Enemies</Filter>
     </ClCompile>
     <ClCompile Include="BossCannon2.cpp">
+      <Filter>Modules\Enemies</Filter>
+    </ClCompile>
+    <ClCompile Include="Bacteria.cpp">
+      <Filter>Modules\Enemies</Filter>
+    </ClCompile>
+    <ClCompile Include="Pelito.cpp">
       <Filter>Modules\Enemies</Filter>
     </ClCompile>
   </ItemGroup>

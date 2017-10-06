@@ -161,6 +161,7 @@ update_status ModulePlayer::Update()
 
 		//}
 
+
 	if (speed_vec.x > 0)
 		speed_vec.x--;
 	if (speed_vec.x < 0)
@@ -170,6 +171,8 @@ update_status ModulePlayer::Update()
 		speed_vec.y--;
 	if (speed_vec.y < 0)
 		speed_vec.y++;
+
+	spaceship_collider->SetPos(position.x, position.y);
 
 	App->render->Blit(graphics, position.x, position.y, &(current_animation->GetCurrentFrame()));
 
