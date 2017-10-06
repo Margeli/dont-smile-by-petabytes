@@ -94,6 +94,7 @@ bool ModuleLevel1::Start()
 	
 	graphics = App->textures->Load("Assets/Images/lvl1_tilemap.png");
 	
+	App->enemies->AddEnemy(SINUS, 300, 150);
 
 	return true;
 }
