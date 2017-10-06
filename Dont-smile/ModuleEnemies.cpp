@@ -5,7 +5,7 @@
 #include "ModuleParticles.h"
 #include "ModuleTextures.h"
 #include "Enemy.h"
-#include "BonusSpaceship.h"
+#include "Bacteria.h"
 #include "LightShooterSpaceship.h"
 #include "GreenShooterSpaceship.h"
 #include "Mine.h"
@@ -154,8 +154,8 @@ void ModuleEnemies::SpawnEnemy(const EnemyInfo& info)
 	{
 		switch (info.type)
 		{
-		case ENEMY_TYPES::BONUS_SPACESHIP:
-			enemies[i] = new Bonus_Spaceship(info.x, info.y, info.shots);
+		case ENEMY_TYPES::BACTERIA:
+			enemies[i] = new Bacteria(info.x, info.y, info.shots);
 			break;
 
 		case ENEMY_TYPES::GREENSHOOTER_SPACESHIP:

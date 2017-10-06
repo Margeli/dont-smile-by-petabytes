@@ -148,8 +148,8 @@ update_status ModulePlayer::Update()
 		//{
 
 		//}
-
-		App->render->Blit(graphics, position.x, position.y, &(current_animation->GetCurrentFrame()));
+	spaceship_collider->SetPos(position.x, position.y);
+	App->render->Blit(graphics, position.x, position.y, &(current_animation->GetCurrentFrame()));
 
 
 		return UPDATE_CONTINUE;

@@ -1,10 +1,10 @@
-#ifndef __BONUS_SPACESHIP_H__
-#define __BONUS_SPACESHIP_H__
+#ifndef __BACTERIA_H__
+#define __BACTERIA_H__
 
 #include "Enemy.h"
 #include "ModuleParticles.h"
 
-class Bonus_Spaceship : public Enemy
+class Bacteria : public Enemy
 {
 private:
 
@@ -36,7 +36,7 @@ private:
 
 public:
 
-	Bonus_Spaceship(int x, int y, int count=3);
+	Bacteria(int x, int y, int count=3);
 	void Move();
 	int shoots = 3;
 
@@ -46,4 +46,4 @@ public:
 
 };
 
-#endif // __BONUS_SPACESHIP_H__
+#endif // __BACTERIA_H__

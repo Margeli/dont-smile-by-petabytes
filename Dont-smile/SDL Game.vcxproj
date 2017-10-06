@@ -103,7 +103,7 @@
     <ClInclude Include="ModuleTextures.h" />
     <ClInclude Include="ModuleWindow.h" />
     <ClInclude Include="p2Point.h" />
-    <ClInclude Include="BonusSpaceship.h" />
+    <ClInclude Include="Bacteria.h" />
     <ClInclude Include="Path.h" />
     <ClInclude Include="StaticCannon.h" />
     <ClInclude Include="Tank.h" />
@@ -135,7 +135,7 @@
     <ClCompile Include="ModuleTextures.cpp" />
     <ClCompile Include="ModuleWindow.cpp" />
     <ClCompile Include="Enemy.cpp" />
-    <ClCompile Include="BonusSpaceship.cpp" />
+    <ClCompile Include="Bacteria.cpp" />
     <ClCompile Include="StaticCannon.cpp" />
     <ClCompile Include="Tank.cpp" />
   </ItemGroup>

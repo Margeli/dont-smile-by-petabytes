@@ -81,11 +81,14 @@ bool ModuleLevel1::Start()
 //		App->player->spaceship_collider->SetPos(App->player->position.x, App->player->position.y);
 //	}
 //
+
+	App->enemies->AddEnemy(BACTERIA, 50, -200);
+
 	scroll_speed = 2;
 	
 	LOG("Loading level 1");
 
-	music_lvl1 = App->audio->Load_Music("Assets/Audio/00_Raiden.ogg");// COMMENT TO STOP MUSIC
+	music_lvl1 = App->audio->Load_Music("");// COMMENT TO STOP MUSIC
 	if (!music_lvl1) {
 	LOG("Error loading lvl1 music: %s",Mix_GetError)
 	}
