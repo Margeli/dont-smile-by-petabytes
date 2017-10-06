@@ -90,7 +90,7 @@ bool ModuleLevel1::Start()
 	if (!music_lvl1) {
 	LOG("Error loading lvl1 music: %s",Mix_GetError)
 	}
-	App->audio->Play_Music(music_lvl1);
+	//App->audio->Play_Music(music_lvl1); 
 	
 	graphics = App->textures->Load("Assets/Images/lvl1_tilemap.png");
 	
@@ -185,7 +185,16 @@ update_status ModuleLevel1::Update()
 		App->fade->FadeToBlack(this, App->stageCompleted);
 		fading = true;
 		*/
+
+
+		
 	}
+
+	if (App->render->camera.y < 0)
+		App->render->camera.y = 0;
+
+	if (App->render->camera.y > 6399)
+		App->render->camera.y = 6399;
 
 	return UPDATE_CONTINUE;
 }
