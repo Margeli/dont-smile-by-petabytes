@@ -5,7 +5,7 @@
 #include "ModuleParticles.h"
 #include "ModuleTextures.h"
 #include "Enemy.h"
-#include "BonusSpaceship.h"
+#include "Sinus.h"
 #include "LightShooterSpaceship.h"
 #include "GreenShooterSpaceship.h"
 #include "Mine.h"
@@ -16,9 +16,9 @@
 #include "StaticCannon.h"
 #include "Boss.h"
 #include"BossCannon.h"
-#include "Boss2.h"
+#include "Bacteria.h"
 #include"BossCannon2.h"
-#include "Box.h"
+#include "Pelito.h"
 
 
 
@@ -154,8 +154,8 @@ void ModuleEnemies::SpawnEnemy(const EnemyInfo& info)
 	{
 		switch (info.type)
 		{
-		case ENEMY_TYPES::BONUS_SPACESHIP:
-			enemies[i] = new Bonus_Spaceship(info.x, info.y, info.shots);
+		case ENEMY_TYPES::BACTERIA:
+			enemies[i] = new Bacteria(info.x, info.y, info.shots);
 			break;
 
 		case ENEMY_TYPES::GREENSHOOTER_SPACESHIP:
@@ -197,16 +197,16 @@ void ModuleEnemies::SpawnEnemy(const EnemyInfo& info)
 			enemies[i] = new BossCannon(info.x, info.y, info.shots);
 			break;
 
-		case ENEMY_TYPES::BOSS2:
-			enemies[i] = new Boss2(info.x, info.y, info.shots);
+		case ENEMY_TYPES::SINUS:
+			enemies[i] = new Sinus(info.x, info.y, info.shots);
 			break;
 
 		case ENEMY_TYPES::BOSS_CANNON2:
 			enemies[i] = new BossCannon2(info.x, info.y, info.shots);
 			break;
 
-		case ENEMY_TYPES::BOX:
-			enemies[i] = new Box(info.x, info.y);
+		case ENEMY_TYPES::PELITO:
+			enemies[i] = new Pelito(info.x, info.y);
 			break;
 
 		}
