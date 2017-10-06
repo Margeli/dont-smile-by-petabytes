@@ -50,10 +50,6 @@ public:
 	Animation* current_animation = nullptr;
 	
 	Animation idle;
-	Animation right;
-	Animation left;	
-	Animation boost;
-	Animation backward;	
 
 	Particle dead_explosion;
 	Particle bomb_explosion;
