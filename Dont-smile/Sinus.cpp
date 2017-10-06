@@ -12,63 +12,27 @@
 Sinus::Sinus(int x, int y, int shoot_num) : Enemy(x, y)
 {
 	
-	sprite_path = App->textures->Load("Assets/Images/Mine.png");
+	sprite_path = App->textures->Load("Assets/Images/Raiden_Spaceship.png");
 
 	if (sprite_path == nullptr) {
 		LOG("Error loading GreenShooter's textures. SDL Error: %s", SDL_GetError());
 	}
 
-	idle.PushBack({ 4,4,24,33 });
-	idle.PushBack({ 28,4,24,33 });
-	idle.PushBack({ 52,4,24,33 });
-	idle.PushBack({ 28,4,24,33 });
+	idle.PushBack({ 13,205,113,110 });
+	
 
 	idle.speed = 0.3f;
 
-	score_points = 180;//180
-	hits_life = 4.0f;
 
-	//collider = App->collision->AddCollider({ 0, 0, 30, 30 }, COLLIDER_TYPE::COLLIDER_ENEMY, (Module*)App->enemies);
+	collider = App->collision->AddCollider({ 0, 0, 110, 105 }, COLLIDER_TYPE::COLLIDER_BOX, (Module*)App->enemies);
 
-	original_pos.x = x;
-	original_pos.y = y;
 	
-	//Mine explosion shot
-	color_rotatory_shot.anim.PushBack({ 22, 40, 6, 7 });
-	color_rotatory_shot.anim.PushBack({ 39, 40, 6, 7 });
-	color_rotatory_shot.anim.PushBack({ 56, 40, 6, 7 });//animation
-	color_rotatory_shot.anim.speed = 0.3f;
-	color_rotatory_shot.life = 3000;
-	color_rotatory_shot.anim.loop = true;
-
-
-	//explosion  particle animation (2nd row particle spritesheet.)
-	explosion.anim.PushBack({ 2,60,34,30 });
-	explosion.anim.PushBack({ 36 ,60,34,30 });
-	explosion.anim.PushBack({ 70,60,34,30 });
-	explosion.anim.PushBack({ 104 ,60,34,30 });
-	explosion.anim.PushBack({ 138 ,60,34,30 });
-	explosion.anim.PushBack({ 172 ,60,34,30 });
-	explosion.anim.PushBack({ 206 ,60,34,30 });
-	explosion.anim.PushBack({ 240,60,34,30 });
-	explosion.anim.PushBack({ 274,60,34,30 });
-	explosion.anim.PushBack({ 308 ,60,34,30 });
-	explosion.anim.PushBack({ 342,60,34,30 });
-	explosion.anim.PushBack({ 376 ,60,34,30 });
-	explosion.anim.PushBack({ 410,60,34,30 });
-	explosion.anim.PushBack({ 446 ,60,34,30 });
-	explosion.anim.PushBack({ 478 ,60,34,30 });
-	explosion.anim.PushBack({ 512,60,34,30 });
-	explosion.anim.PushBack({ 0,0,0,0 });
-
-	explosion.life = 1000;
-	explosion.anim.loop = false;
 }
 
 void Sinus::Move() {
 	speed = 3.0f;
 	if (to_negative) {
-		iterator -= 0.1f;
+		iterator -= 0.05f;
 		if (iterator == -1.0f) {
 			to_negative = false;
 		}
@@ -83,7 +47,7 @@ void Sinus::Move() {
 	}
 	animation = &idle;
 		position.y += speed;
-		position.x +=15* sin(iterator);
+		position.x +=10* sin(iterator);
 
 }
 
