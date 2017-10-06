@@ -51,22 +51,22 @@ public:
 
 	SDL_Texture* graphics = nullptr;
 	Animation* current_animation = nullptr;
-	
+
 	Animation idle;
 
 	Particle dead_explosion;
 	Particle bomb_explosion;
-	iPoint position;
-	iPoint saved_position;
-	
+	fPoint position;
+	fPoint saved_position;
+
 	Collider* spaceship_collider;
-	bool destroyed=false;
+	bool destroyed = false;
 	bool player1 = false;
 	float hit_dmg;
 	float bomb_dmg;
 	bool godmode = false;
 	uint high_score = 0;
-	uint score=0;
+	uint score = 0;
 	int total_bombs;
 	Uint32 bomb_thrown;
 	Uint32 bomb_life;
@@ -86,12 +86,20 @@ public:
 	uint M_Powerup_Lvl;
 
 	const int camera_speed_module = 4;
-	
+
 	Mix_Chunk* fx_shoot = nullptr;
+	//////
 
-	int speed = 4;
+	vec_2d speed_vec = {0, 0};
 
+	void updatePosition();
 
+	const float speed = 0.1f;
+	const float max_speed = 150.0f;
+	const float friction = 0.1f;
+
+	int counter = 0;
+	int max = 2;
 	
 	
 };

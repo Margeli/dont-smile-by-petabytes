@@ -73,63 +73,6 @@ CannonTank::CannonTank(int x, int y, int shoot_num) : Enemy(x, y)
 
 void CannonTank::Move() {
 
-	increment_y = (position.y - initial_y);//SAME MOVEMENT AS THE TANK
-
-	if (player_initial_x > position.x) {		
-		position.x++;
-		speed = 0.1f;
-
-	}
-	else if (player_initial_x< position.x) {		
-		position.x--;
-		speed = 0.1f;
-	}
-	else {
-		speed = 0.0f;
-	}
-
-	if ((App->player->position.y-2 > position.y + 34)) {// DOWN
-
-		if ((App->player->position.x > position.x) && (App->player->position.x < position.x + 38)) {
-			animation = &down;
-		}
-		else if (App->player->position.x > position.x-2) {
-			animation = &down_right;
-		}
-		else if (App->player->position.x < position.x + 38) {
-			animation = &down_left;
-		}
-	}
-	else if ((App->player->position.y < position.y)) {//UP
-
-		if ((App->player->position.x > position.x) && (App->player->position.x < position.x + 38)) {
-			animation = &up;
-		}
-		else if (App->player->position.x > position.x) {
-			animation = &up_right;
-		}
-		else if (App->player->position.x < position.x + 38) {
-			animation = &up_left;
-		}
-	}
-	else if ((App->player->position.y > position.y) && (App->player->position.y < position.y + 34)) {//MIDDLE
-		if (App->player->position.x > position.x) {
-			animation = &right;
-		}
-		else if (App->player->position.x < position.x + 38) {
-			animation = &left;
-		}
-	}
-
-	if (SDL_GetTicks() - timer_shot > 2500 && shoot_number>0) {
-		Shot(color_rotatory_shot, App->player->position, position);
-		timer_shot = SDL_GetTicks();
-		shoot_number--;
-	}
-
-
-	position.y += speed;
-	collider->SetPos(position.x, position.y);
 }
 
 

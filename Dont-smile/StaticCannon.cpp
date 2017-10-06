@@ -83,47 +83,7 @@ StaticCannon::StaticCannon(int x, int y, int shoot_num) : Enemy(x, y)
 
 void StaticCannon::Move() {
 	
-	if ((App->player->position.y > position.y+25)) {// DOWN
-		
-		if ((App->player->position.x > position.x) && (App->player->position.x < position.x + 28)) {
-			animation = &down;
-		}
-		else if (App->player->position.x > position.x) {
-			animation = &down_right;
-		}
-		else if (App->player->position.x < position.x+28) {
-			animation = &down_left;
-		}
-	}
-	else if ((App->player->position.y < position.y)) {//UP
 
-		if ((App->player->position.x > position.x) && (App->player->position.x < position.x + 28)) {
-			animation = &up;
-		}
-		else if (App->player->position.x > position.x) {
-			animation = &up_right;
-		}
-		else if (App->player->position.x < position.x + 28) {
-			animation = &up_left;
-		}
-	}
-	else if ((App->player->position.y > position.y ) && (App->player->position.y < position.y+ 25)) {//MIDDLE
-		if (App->player->position.x > position.x) {
-			animation = &right;
-		}
-		else if (App->player->position.x < position.x + 28) {
-			animation = &left;
-		}
-	}
-
-	if (SDL_GetTicks() - timer_shot > 2500) {
-		Shot(color_rotatory_shot, App->player->position, position);
-			timer_shot = SDL_GetTicks();
-	}
-
-
-
-	App->render->Blit(graphics, position.x, position.y, &base);//Draws the base of the Cannon
 	
 }
 

@@ -100,24 +100,31 @@ bool ModulePlayer::Start()
 	return ret;
 }
 
+void ModulePlayer::updatePosition()
+{
+	
+	position.x += speed_vec.x;
+	
+}
+
 // Update: draw background
 update_status ModulePlayer::Update()
 {
 	
-	
+
 
 	if (!App->level1->first_animation) {// not able to move during first animation
 		if (App->input->keyboard[SDL_SCANCODE_W] == KEY_STATE::KEY_REPEAT || App->input->gamepad[0] == KEY_STATE::KEY_REPEAT) //---UP
 		{
+			
 			position.y -= speed;
-
 			//App->render->camera.y += 4;
 
 
 		}
 
 
-		if (App->input->keyboard[SDL_SCANCODE_S] == KEY_STATE::KEY_REPEAT || App->input->gamepad[1] == KEY_STATE::KEY_REPEAT)//---DOWN
+		else if (App->input->keyboard[SDL_SCANCODE_S] == KEY_STATE::KEY_REPEAT || App->input->gamepad[1] == KEY_STATE::KEY_REPEAT)//---DOWN
 		{
 			position.y += speed;
 
@@ -126,19 +133,37 @@ update_status ModulePlayer::Update()
 		}
 		if (App->input->keyboard[SDL_SCANCODE_D] == KEY_STATE::KEY_REPEAT || App->input->gamepad[2] == KEY_STATE::KEY_REPEAT)//---RIGHT
 		{
-			position.x += speed;
+			if (speed_vec.x > -max_speed && speed_vec.x < max_speed)
+			speed_vec.x += speed;
+			updatePosition();
 			//App->render->camera.x -= camera_speed_module;
 
 		}
-
-		if (App->input->keyboard[SDL_SCANCODE_A] == KEY_STATE::KEY_REPEAT || App->input->gamepad[3] == KEY_STATE::KEY_REPEAT)//---LEFT
+		else if (App->input->keyboard[SDL_SCANCODE_A] == KEY_STATE::KEY_REPEAT || App->input->gamepad[3] == KEY_STATE::KEY_REPEAT)//---LEFT
 
 		{
-			position.x -= speed;
+			if (speed_vec.x > -max_speed && speed_vec.x < max_speed)
+			speed_vec.x -= speed;
+			updatePosition();
 			//App->render->camera.x += 4;
-
-
 		}
+		else {
+			if (speed_vec.x > 0 && speed_vec.x < friction) {
+				speed_vec.x = 0;
+			}
+			else if (speed_vec.x < 0 && speed_vec.x > friction) {
+				speed_vec.x = 0;
+			}
+			else if (speed_vec.x > 0) {
+				speed_vec.x -= friction;
+			}
+			else if (speed_vec.x < 0) {
+				speed_vec.x += friction;
+			}
+			updatePosition();
+		}
+
+
 		if (App->input->keyboard[SDL_SCANCODE_SPACE] == KEY_STATE::KEY_DOWN || App->input->gamepad[4] == KEY_STATE::KEY_DOWN)// --SPACE SHOT
 		{
 			
@@ -309,3 +334,5 @@ void ModulePlayer::Dead() {
 	App->textures->Unload(graphics);
 		
 }
+
+

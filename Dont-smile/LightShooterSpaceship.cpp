@@ -112,54 +112,7 @@ LightShooter_Spaceship::LightShooter_Spaceship(int x, int y, int count) : Enemy(
 
 void LightShooter_Spaceship::Move(){
 
-if (position.x >App->player->position.x) { // LEFT
-	
-	b_right = false;
-	b_left = true;
-}
-else if (position.x < App->player->position.x) {// RIGHT
-	
-	b_left = false;
-	b_right = true;
-}
 
- if ((position.y >= App->player->position.y )&&(first)) {
-	
-	if (b_left) {
-		animation = &left;
-	}
-	else if (b_right) {
-		animation = &right;
-	}	
-	b_idle = true;
-	first = false;
-}
- if (b_idle) {
-	
-	position.y = App->player->position.y;
-	if (shoot_number) {
-		Shot(color_rotatory_shot, App->player->position, { position.x + 15, position.y + 15 });
-	}
-	 downwards = false;
-	 b_idle = false;
- }
-
-if (downwards) {
-	if (b_right) {
-		animation = &downwards_right;
-	}
-	else {
-		animation = &left_downwards;
-	}
-	position = original_pos + down_path.GetCurrentSpeed();
-}
-
-else {
-	
-	animation = &up;
-	
-	position.y-=2.6f;
-}
 }
 
 void LightShooter_Spaceship::Shot(Particle& shot, iPoint aim_position, fPoint shot_initial_pos) {

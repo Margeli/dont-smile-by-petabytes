@@ -77,77 +77,7 @@ GreenShooter_Spaceship::GreenShooter_Spaceship(int x, int y, int shoot_num) : En
 }
 
 void GreenShooter_Spaceship::Move() {
-	increment_y = (position.y - initial_y);
 
-	if (lineal_shoot) {	//shots 5 bullets sequentially
-		Shot(color_rotatory_shot, App->player->position, position);
-		Shot(color_rotatory_shot, App->player->position, {position.x+ 53, position.y+20  });
-		
-		lineal_shoot = false;
-	}
-
-	if (disperse_shoot) {//shots 8 bullets at the same time
-		ShotVector(color_rotatory_shot, {2, 1}, { position.x + 35, position.y + 26 });
-		ShotVector(color_rotatory_shot, { -1, 1 }, { position.x + 35, position.y + 26 });
-		ShotVector(color_rotatory_shot, { 3, 0 }, { position.x + 35, position.y + 26 });
-		ShotVector(color_rotatory_shot, { -3, 0 }, { position.x + 35, position.y + 26 });
-		ShotVector(color_rotatory_shot, { 1,-3 }, { position.x + 35, position.y + 26 });
-		ShotVector(color_rotatory_shot, { -1, -3 }, { position.x + 35, position.y + 26 });
-		ShotVector(color_rotatory_shot, { 3, -2 },  { position.x + 35, position.y + 26 });
-		ShotVector(color_rotatory_shot, { -3, -2 },  { position.x + 35, position.y + 26 });
-		
-
-		
-
-		disperse_shoot = false;
-	}
-
-
-	if (down) {
-		if (increment_y < 55) {
-			speed = 0.3f;
-			if ((increment_y >= 40) && (shoot_number == 3)) {//lineal shot
-				lineal_shoot = true;
-				shoot_number--;
-			}
-		}
-
-		else if (increment_y > 55 && increment_y < 120) {
-			speed = 1.0f;			
-			animation = &boost;
-			if (position.x < App->player->position.x)position.x++;
-			else if (position.x > App->player->position.x)position.x--;
-		}
-
-		else if (increment_y >= 120) {
-			
-			down = false;
-			speed = -2.0f;
-			animation = &backward_idle;
-		}
-	}
-	else
-	{
-		if (increment_y < 120 && increment_y>-200) {
-			speed = -2.3f;
-			if ((increment_y <= -80) && (shoot_number == 2)) {//disperse shot
-				disperse_shoot = true;
-				shoot_number--;
-
-			}
-		}
-		else if (increment_y < -200) {
-			speed = -3.0f;
-			animation = &backward_boost;
-			if ((increment_y <= -300) && (shoot_number == 1)) {//disperse shot
-				disperse_shoot = true;
-				shoot_number--;
-			}
-
-		}
-	}
-	position.y += speed;
-	collider->SetPos(position.x, position.y);
 	
 }
 
