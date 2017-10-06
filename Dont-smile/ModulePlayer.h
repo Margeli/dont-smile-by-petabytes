@@ -10,7 +10,10 @@
 struct SDL_Texture;
 struct Collider;
 
-
+struct vector2 {
+	float y = 0;
+	float x = 0;
+};
 
 class ModulePlayer : public Module
 {
@@ -85,6 +88,9 @@ public:
 	uint Red_Powerup_Lvl;
 	uint Blue_Powerup_Lvl;
 	uint M_Powerup_Lvl;
+
+	float speed = 3;
+	float inertia = 0;
 
 	
 	

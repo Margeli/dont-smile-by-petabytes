@@ -97,12 +97,11 @@ update_status ModulePlayer::Update()
 {
 
 	position.y ;
-	int speed = 2;
 		
 	if (App->input->keyboard[SDL_SCANCODE_W] == KEY_STATE::KEY_REPEAT || App->input->gamepad[0] == KEY_STATE::KEY_REPEAT) //---UP
 	{
 		position.y -= speed;
-		App->render->camera.y += 4;
+		App->render->camera.y += 2;
 		if (-position.y*SCREEN_SIZE > App->render->camera.y) {
 			position.y = -App->render->camera.y / SCREEN_SIZE; //upper player limit. ------->The relation between camera.y and position.y is camera.y=-position.y*SCREEN_SIZE
 		}
@@ -122,7 +121,7 @@ update_status ModulePlayer::Update()
 	if (App->input->keyboard[SDL_SCANCODE_D] == KEY_STATE::KEY_REPEAT || App->input->gamepad[2] == KEY_STATE::KEY_REPEAT)//---RIGHT
 	{
 		position.x += speed;
-		App->render->camera.x -= 4;
+		App->render->camera.x -= 2;
 
 		if (App->render->camera.x <= -154) {//right camera limit
 			App->render->camera.x = -154;
@@ -136,7 +135,7 @@ update_status ModulePlayer::Update()
 
 	{
 		position.x -= speed;
-		App->render->camera.x += 4;
+		App->render->camera.x += 2;
 
 		if (App->render->camera.x >= 100) {//left camera limit
 			App->render->camera.x = 100;
