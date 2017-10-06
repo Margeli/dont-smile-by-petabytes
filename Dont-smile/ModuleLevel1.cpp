@@ -125,7 +125,17 @@ bool ModuleLevel1::CleanUp()
 // Update: draw background
 update_status ModuleLevel1::Update()
 {
-	
+	if (App->render->camera.y <= 0)
+		App->render->camera.y = 0;
+
+	if (App->render->camera.y > 6399)
+		App->render->camera.y = 6399;
+
+	if (App->render->camera.x > 00)
+		App->render->camera.x = 0;
+
+	if (App->render->camera.x <= -1000)
+		App->render->camera.x = -1000;
 
 	//if (App->render->camera.y < 100) {
 	//	
@@ -183,17 +193,7 @@ update_status ModuleLevel1::Update()
 		
 	}
 
-	if (App->render->camera.y <= 0)
-		App->render->camera.y = 0;
 
-	if (App->render->camera.y > 6399)
-		App->render->camera.y = 6399;
-
-	if (App->render->camera.x > 0)
-		App->render->camera.x = 0;
-
-	if (App->render->camera.x <= -1000 )
-		App->render->camera.x = -1000;
 
 	return UPDATE_CONTINUE;
 }

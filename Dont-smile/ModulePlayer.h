@@ -10,7 +10,10 @@
 struct SDL_Texture;
 struct Collider;
 
-
+struct vec_2d {
+	float x;
+	float y;
+};
 
 class ModulePlayer : public Module
 {
@@ -87,6 +90,8 @@ public:
 	Mix_Chunk* fx_shoot = nullptr;
 
 	int speed = 4;
+
+
 	
 	
 };

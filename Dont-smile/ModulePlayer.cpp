@@ -111,7 +111,7 @@ update_status ModulePlayer::Update()
 		{
 			position.y -= speed;
 
-			App->render->camera.y += 4;
+			//App->render->camera.y += 4;
 
 
 		}
@@ -121,13 +121,13 @@ update_status ModulePlayer::Update()
 		{
 			position.y += speed;
 
-			App->render->camera.y -= camera_speed_module;
+			//App->render->camera.y -= camera_speed_module;
 
 		}
 		if (App->input->keyboard[SDL_SCANCODE_D] == KEY_STATE::KEY_REPEAT || App->input->gamepad[2] == KEY_STATE::KEY_REPEAT)//---RIGHT
 		{
 			position.x += speed;
-			App->render->camera.x -= camera_speed_module;
+			//App->render->camera.x -= camera_speed_module;
 
 		}
 
@@ -135,7 +135,7 @@ update_status ModulePlayer::Update()
 
 		{
 			position.x -= speed;
-			App->render->camera.x += 4;
+			//App->render->camera.x += 4;
 
 
 		}
