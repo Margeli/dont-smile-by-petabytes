@@ -27,10 +27,10 @@ ModuleLevel1::ModuleLevel1()
 	foreground.h = 0;
 
 	// Background / sky
-	background.x = 789;
-	background.y = 9600-SCREEN_HEIGHT;
-	background.w = 3500;
-	background.h =9600;
+	background.x = 0;
+	background.y = 0;
+	background.w = 2333;
+	background.h =6399;
 
 	ship_launcher.x = 0;
 	ship_launcher.y = 0;
@@ -139,14 +139,14 @@ update_status ModuleLevel1::Update()
 
 	
 
-
+/*
 	if (App->player->position.y <= -2735) {
 
 		scroll_speed = 0;
  		boss_music = App->audio->Load_Music("Assets/Audio/Boss_Music.ogg");
 		if (!boss_music) {
 			LOG("Error loading boss music: %s", Mix_GetError)
-		}
+		}*/
 		/*App->audio->Play_Music(boss_music);
 		App->player->spaceship_speed = 0;
 <<<<<<< HEAD
@@ -162,8 +162,8 @@ update_status ModuleLevel1::Update()
 	
 		App->fade->FadeToBlack(this, App->stageCompleted);
 		fading = true;
-		*/
-	}
+		
+	}*/
 
 	return UPDATE_CONTINUE;
 }
