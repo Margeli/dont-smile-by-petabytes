@@ -8,7 +8,7 @@
 #include "Bacteria.h"
 #include "LightShooterSpaceship.h"
 #include "GreenShooterSpaceship.h"
-#include "Mine.h"
+#include "Sinus.h"
 #include "HeavyShooter.h"
 #include "MegaTank.h"
 #include "Tank.h"
@@ -166,8 +166,8 @@ void ModuleEnemies::SpawnEnemy(const EnemyInfo& info)
    			enemies[i] = new LightShooter_Spaceship(info.x, info.y, info.shots);
 			break;
 
-		case ENEMY_TYPES::MINE:
-			enemies[i] = new Mine(info.x, info.y, info.shots);
+		case ENEMY_TYPES::SINUS:
+			enemies[i] = new Sinus(info.x, info.y, info.shots);
 			break;
 
 		case ENEMY_TYPES::HEAVY_SHOOTER:

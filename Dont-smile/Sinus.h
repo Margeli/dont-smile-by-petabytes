@@ -1,11 +1,11 @@
-#ifndef __MINE_H__
-#define __MINE_H__
+#ifndef __SINUS_H__
+#define __SINUS_H__
 
 #include "Enemy.h"
 #include "ModuleParticles.h"
 #include "Path.h"
 
-class Mine : public Enemy
+class Sinus : public Enemy
 {
 private:
 	
@@ -30,7 +30,7 @@ private:
 
 public:
 
-	Mine(int x, int y, int shoot_num);
+	Sinus(int x, int y, int shoot_num);
 	void Move();
 
 
@@ -38,4 +38,4 @@ public:
 
 };
 
-#endif// __MINE_H__
+#endif// __SINUS_H__
