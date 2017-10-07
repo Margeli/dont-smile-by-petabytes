@@ -36,7 +36,18 @@ ModulePlayer::ModulePlayer()
 	idle.PushBack({ 755, 14, 150, 158 });
 	idle.speed = 0.1f;
 
-
+	splash.PushBack({ 0,321,200,177 });
+	splash.PushBack({ 201,321,200,177 });
+	splash.PushBack({ 402,321,200,177 });
+	splash.PushBack({ 603,321,200,177 });
+	splash.PushBack({ 804,321,200,177 });
+	splash.PushBack({ 1005,321,200,177 });
+	splash.PushBack({ 1206,321,200,177 });
+	splash.PushBack({1407,321,200,177 });
+	splash.PushBack({ 1608,321,200,177 });
+	splash.PushBack({ 1809,321,200,177 });
+	splash.PushBack({ 2010,321,200,177 });
+	splash.speed = 0.3f;
 
 }
 
@@ -273,7 +284,7 @@ update_status ModulePlayer::Update()
 
 		if (App->input->keyboard[SDL_SCANCODE_A] == KEY_STATE::KEY_IDLE //check error
 			&& App->input->keyboard[SDL_SCANCODE_D] == KEY_STATE::KEY_IDLE && !App->level1->first_animation) {
-			current_animation = &idle;			
+						
 		}
 
 
