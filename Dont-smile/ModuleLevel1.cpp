@@ -252,7 +252,7 @@ void ModuleLevel1::CreatePelitos()
 {
 	int x_pelito; 
 	int y_pelito;
-	for (int i = 0; i > -6000; i -= 400) {
+	for (int i = -1000; i > -6000; i -= 400) {
 		x_pelito = (rand() % 1800) + 200;
 		y_pelito = rand() % 100;
 		App->enemies->AddEnemy(PELITO, x_pelito, i + y_pelito);

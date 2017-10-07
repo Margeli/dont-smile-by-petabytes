@@ -35,7 +35,7 @@ Pelito::Pelito(int x, int y) : Enemy(x, y)
 	animation = &idle;
 	hits_life = 2.0f;// 1.0f
 
-	collider = App->collision->AddCollider({ 0, 0, 179, 274 }, COLLIDER_TYPE::COLLIDER_BOX, (Module*)App->enemies);
+	collider = App->collision->AddCollider({ 0, -100, 149, 280 }, COLLIDER_TYPE::COLLIDER_BOX, (Module*)App->enemies);
 
 
 	position.x = x;

@@ -112,7 +112,7 @@ bool ModulePlayer::Start()
 	//	}. -> Pcs
 
 	if (spaceship_collider==nullptr)
-	spaceship_collider = App->collision->AddCollider({ 0,0, 145, 150 }, COLLIDER_BOX, this);//COLLIDER_PLAYER
+	spaceship_collider = App->collision->AddCollider({ 0,0, 100, 100 }, COLLIDER_PLAYER, this);//COLLIDER_PLAYER
 
 	total_bombs = 3;
 	bomb_thrown = 0;
@@ -311,7 +311,7 @@ update_status ModulePlayer::Update()
 		
 
 		if (spaceship_collider != nullptr)
-			spaceship_collider->SetPos(position.x+5, position.y);
+			spaceship_collider->SetPos(position.x+30, position.y + 20);
 
 		// Draw everything --------------------------------------
 		App->render->Blit(graphics, position.x, position.y, &(current_animation->GetCurrentFrame()));
