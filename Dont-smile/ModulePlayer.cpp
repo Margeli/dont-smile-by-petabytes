@@ -48,6 +48,7 @@ ModulePlayer::ModulePlayer()
 	splash.PushBack({ 1809,321,200,177 });
 	splash.PushBack({ 2010,321,200,177 });
 	splash.speed = 0.3f;
+	splash.loop = false;
 
 	
 	estela.anim.PushBack({ 774,560,199,213 });
@@ -147,11 +148,11 @@ void ModulePlayer::check_map_limits()
 	if (position.x >(MAP1_WIDTH - 370) -map_margin) //RIGhT
 		position.x = (MAP1_WIDTH - 370) - map_margin;
 
-	if (position.y < -MAP1_HEIGHT + (SCREEN_HEIGHT+20) + map_margin)
-		position.y = (-MAP1_HEIGHT + (SCREEN_HEIGHT + 20)) + map_margin;
+	//if (position.y < -MAP1_HEIGHT + (SCREEN_HEIGHT+20) + map_margin)
+	//	position.y = (-MAP1_HEIGHT + (SCREEN_HEIGHT + 20)) + map_margin;
 
-	if (position.y > (400) - map_margin)
-		position.y = (400) - map_margin;
+	//if (position.y > (400) - map_margin)
+	//	position.y = (400) - map_margin;
 
 }
 
@@ -219,7 +220,7 @@ update_status ModulePlayer::Update()
 		}
 		else if (App->input->keyboard[SDL_SCANCODE_S] == KEY_STATE::KEY_REPEAT || App->input->gamepad[1] == KEY_STATE::KEY_REPEAT) //---DOWN
 		{
-			
+
 			if (acceleration_vec.y > -max_speed && acceleration_vec.y < max_speed)
 				acceleration_vec.y -= acceleration;
 			updatePosition();
@@ -248,7 +249,7 @@ update_status ModulePlayer::Update()
 		else if (App->input->keyboard[SDL_SCANCODE_D] == KEY_STATE::KEY_REPEAT || App->input->gamepad[2] == KEY_STATE::KEY_REPEAT)//---RIGHT
 		{
 			if (acceleration_vec.x > -max_speed && acceleration_vec.x < max_speed)
-			acceleration_vec.x += acceleration;
+				acceleration_vec.x += acceleration;
 			updatePosition();
 			//App->render->camera.x -= camera_speed_module;
 		}
@@ -256,7 +257,7 @@ update_status ModulePlayer::Update()
 
 		{
 			if (acceleration_vec.x > -max_speed && acceleration_vec.x < max_speed)
-			acceleration_vec.x -= acceleration;
+				acceleration_vec.x -= acceleration;
 			updatePosition();
 			//App->render->camera.x += 4;
 		}
@@ -268,40 +269,20 @@ update_status ModulePlayer::Update()
 
 		if (App->input->keyboard[SDL_SCANCODE_SPACE] == KEY_STATE::KEY_DOWN || App->input->gamepad[4] == KEY_STATE::KEY_DOWN)// --SPACE SHOT
 		{
-			
+
 
 		}
-
-		//if ((App->input->keyboard[SDL_SCANCODE_B] == KEY_STATE::KEY_DOWN || App->input->gamepad[8] == KEY_STATE::KEY_REPEAT) && total_bombs > 0 && SDL_GetTicks() - last_bomb > 5000) //-----BOMB! (only when ur player has bombs and passed 5s from the last bomb)
-		//{
-		//	bomb_thrown = SDL_GetTicks();
-		//	App->particles->AddParticle(bomb, position.x + 8, position.y, COLLIDER_EXPLOSION, 0, "Assets/Audio/Fx_Drop_Bomb");
-		//	saved_position = position;
-		//	total_bombs--;
-		//	last_bomb = SDL_GetTicks();
-		//}
-		//if (bomb_thrown != 0 && SDL_GetTicks() - bomb_thrown > 1300) {// 1.3s to generate the explosion of the bomb(damaging collider)
-		//	App->particles->AddParticle(bomb_explosion, saved_position.x - 70, saved_position.y - 250, COLLIDER_BOMB, 0, "Assets/Audio/Fx_Bomb_Explosion");
-		//	bomb_thrown = 0;
-		//	bomb_life = SDL_GetTicks();
-		//	saved_position = { 0,0 };
-
-		//}
-		//if (bomb_life != 0 && SDL_GetTicks() - bomb_life > 3000) {// bomb life 3s then delete particle
-		//	bomb_life = 0;
-		//	bomb_explosion.to_delete;
-		//}
 
 
 
 
 		if (App->input->keyboard[SDL_SCANCODE_A] == KEY_STATE::KEY_IDLE //check error
 			&& App->input->keyboard[SDL_SCANCODE_D] == KEY_STATE::KEY_IDLE && !App->level1->first_animation) {
-						
+
 		}
 
 
-	}
+
 
 
 		if (App->input->keyboard[SDL_SCANCODE_F2] == KEY_STATE::KEY_DOWN || App->input->gamepad[5] == KEY_STATE::KEY_REPEAT)//GOD MODE (press right stick on controller)
@@ -321,16 +302,26 @@ update_status ModulePlayer::Update()
 
 		}
 
-		
+	}
 
 		if (spaceship_collider != nullptr)
 			spaceship_collider->SetPos(position.x+30, position.y + 20);
 
 		// Draw everything --------------------------------------
 
-		if ((SDL_GetTicks() - estela_time)>30) {//time between particles
+		if ((SDL_GetTicks() - estela_time)>30 && !App->level1->jumped) {//time between particles
 			App->particles->AddParticle(estela, position.x-25, position.y-30, COLLIDER_BOX);
 			estela_time = SDL_GetTicks();
+		}
+
+		if (App->player->position.y <= -5100) {
+			App->level1->jumped = true;
+		}
+
+		if (App->level1->jumped == true) {
+			position.y = -5100;
+			if (current_animation != &splash)
+			current_animation = &splash;
 		}
 
 
@@ -362,12 +353,15 @@ update_status ModulePlayer::Update()
 		}
 
 
+			if (!App->level1->jumped)
 		move_camera_with_player();
 
+		if (!App->level1->jumped)
 		check_map_limits();
 
 		LOG("%d", App->render->camera.x);
 
+		if (!App->level1->jumped)
 		App->level1->scroll();
 
 		

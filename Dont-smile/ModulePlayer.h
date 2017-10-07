@@ -115,9 +115,9 @@ public:
 
 	void applyInertia();
 
-	const float acceleration = 0.5f;
-	const float max_speed = 5.0f;
-	const float friction = 0.1f;
+	const float acceleration = 0.05f;
+	const float max_speed = 3.0f;
+	const float friction = 0.01f;
 
 	const int map_margin = 300;
 

@@ -169,10 +169,7 @@ update_status ModuleLevel1::Update()
 	if (App->player->position.y >= -4000) {
 		SinusBacteriaSpawning(App->player->win_chain, App->player->position.x, App->player->position.y, spawn_distance);
 	}
-	
-	if (App->player->position.y <= -4000) {
-		jumped = true;
-	}
+
 		
 		
 	if (jumped) {
@@ -256,8 +253,7 @@ void ModuleLevel1::SinusBacteriaSpawning(uint win_chain, float pos_x, float pos_
 		counter_spawn_timer = 0; //reestart timer
 		last_spawn_bacteria= SDL_GetTicks();
 	}
-
-
+	
 
 
 
