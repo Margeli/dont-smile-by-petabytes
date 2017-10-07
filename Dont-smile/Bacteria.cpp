@@ -42,11 +42,14 @@ Bacteria::Bacteria(int x, int y, int count) : Enemy(x, y)
 }
 
 void Bacteria::Move() {
-	
-	
-position.y += speed;
-collider->SetPos(position.x, position.y);
+
+
+	position.y += speed;
+
+	collider->SetPos(position.x, position.y);
 }
+
+
 
 void Bacteria::Shot(Particle& shot, iPoint aim_position, fPoint shot_initial_pos) {
 	

@@ -96,6 +96,8 @@ update_status ModuleEnemies::PostUpdate()
 				LOG("DeSpawning enemy at %d", enemies[i]->position.y );
 				delete enemies[i];
 				enemies[i] = nullptr;
+				
+			
 			}
 		}
 	}
