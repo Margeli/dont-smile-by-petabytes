@@ -76,13 +76,12 @@ bool ModuleLevel1::Start()
 		App->player->spaceship_collider = App->collision->AddCollider({ 0,0, 23, 26 }, COLLIDER_PLAYER, App->player);
 	App->player->spaceship_collider->SetPos(App->player->position.x, App->player->position.y);
 }
-
+	
 	if ((App->player->spaceship_collider == nullptr) && (App->player->godmode == false)) {
 		App->player->spaceship_collider = App->collision->AddCollider({ 0,0, 23, 26 }, COLLIDER_PLAYER, App->player);
 		App->player->spaceship_collider->SetPos(App->player->position.x, App->player->position.y);
 	}
 
-	scroll_speed = 2;
 	
 	LOG("Loading level 1");
 
@@ -96,6 +95,8 @@ bool ModuleLevel1::Start()
 	
 	App->enemies->AddEnemy(SINUS, 600, 300);
 	App->enemies->AddEnemy(BACTERIA, 600, 350);
+
+
 
 	return true;
 }
@@ -124,12 +125,32 @@ bool ModuleLevel1::CleanUp()
 	return true;
 }
 
+void ModuleLevel1::scroll()
+{
+
+	if (App->player->position.y > inferior_limit) {
+		App->player->position.y = inferior_limit;
+	}
+
+	if (counter_sc_spd > max_sc_sp) {
+		inferior_limit -= scroll_speed;
+		counter_sc_spd = 0;
+	}
+
+	//if (counter_sc_spd > max_sc_sp) {
+	//	inferior_limit -= scroll_speed;
+	//	counter_sc_spd = 0;
+	//}
+	else {
+		counter_sc_spd++;
+	}
+}
+
 // Update: draw background
 update_status ModuleLevel1::Update()
 {
 
-
-
+	
 	if (jumped) {
 
 		App->player->win_chain++;
@@ -159,40 +180,26 @@ update_status ModuleLevel1::Update()
 	
 
 	// Draw everything --------------------------------------
+
+
 	
 	App->render->Blit(graphics, 0, -6399 + SCREEN_HEIGHT, &background); 
 
-	//App->render->Blit(graphics, -50, -2965, &foreground);
-	
-	//App->render->Blit(graphics, -50, -150, &ship_launcher, 1.8f);
 
 
 
 	if (App->player->position.y <= -2735) {       //////////------------------------------------
 
-	/*if (App->player->position.y <= -2735) {
->>>>>>> 3e103628f5c7ff2c13315f9d3328defd588d2993
-
-		scroll_speed = 0;
-		boss_music = App->audio->Load_Music("Assets/Audio/Boss_Music.ogg");
-		if (!boss_music) {
-			LOG("Error loading boss music: %s", Mix_GetError)
-		}*/
-		/*App->audio->Play_Music(boss_music);
-		App->player->spaceship_speed = 0;
-<<<<<<< HEAD
-		/*if (App->player2->IsEnabled)
-			App->player2->spaceship_speed = 0;*/
 
 		if (App->player2->IsEnabled())
 			App->player2->spaceship_speed = 0;
-
-		//}
-
-		//---------------
-
-
 	}
+
+
+
+
+
+
 
 	return UPDATE_CONTINUE;
 }

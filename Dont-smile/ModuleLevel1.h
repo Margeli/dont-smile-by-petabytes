@@ -30,14 +30,18 @@ public:
 	SDL_Rect background;
 	SDL_Rect ship_launcher;
 	bool fading = false;
-	int scroll_speed;
 	bool jumped = false;
 	
 	float foreground_pos;
 	bool first_animation=false;
 	bool forward;
 
-	
+	int counter_sc_spd= 0;
+	int max_sc_sp = 2;
+	float scroll_speed = 5;
+	double inferior_limit = -1000;
+
+	void scroll();
 
 
 	

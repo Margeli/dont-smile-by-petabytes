@@ -18,7 +18,12 @@ struct vec_2d {
 struct particle {
 	vec_2d position{ 0.0f,0.0f };
 	SDL_Texture* graphs = nullptr;
-	float scale = 1.0f;
+	double scale = 1.0f;
+	SDL_Rect section = { 390,240, 47,47 };
+	int initial_width = 47;
+	int initial_height = 47;
+	int initial_x = 390;
+	int initial_y = 240;
 };
 
 class ModulePlayer : public Module
@@ -114,6 +119,8 @@ public:
 
 	int counter = 0;
 	int max = 2;
+
+	particle estela;
 	
 	
 };

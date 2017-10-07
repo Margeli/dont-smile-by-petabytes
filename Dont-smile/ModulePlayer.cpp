@@ -45,6 +45,7 @@ ModulePlayer::~ModulePlayer()
 
 bool ModulePlayer::CleanUp()
 {
+
 	LOG("Unloading player");
 
 	App->textures->Unload(graphics);
@@ -60,6 +61,7 @@ bool ModulePlayer::CleanUp()
 // Load assets
 bool ModulePlayer::Start()
 {
+	
 	App->collision->Enable();
 	LOG("Loading player textures");
 	bool ret = true;
@@ -105,6 +107,8 @@ bool ModulePlayer::Start()
 	bomb_thrown = 0;
 	bomb_life = 0;
 	last_bomb = 0;
+
+
 
 	return ret;
 }
@@ -181,7 +185,7 @@ void ModulePlayer::applyInertia()
 // Update: draw background
 update_status ModulePlayer::Update()
 {
-	
+	App->level1->scroll();
 
 	applyInertia();
 	if (!App->level1->first_animation) {// not able to move during first animation
@@ -300,6 +304,8 @@ update_status ModulePlayer::Update()
 
 		// Draw everything --------------------------------------
 		App->render->Blit(graphics, position.x, position.y, &(current_animation->GetCurrentFrame()));
+
+		
 		// Draw UI (score) --------------------------------------
 
 		if (score > high_score)
@@ -327,7 +333,22 @@ update_status ModulePlayer::Update()
 
 		check_map_limits();
 
-		LOG("%d",App->render->camera.x)
+		LOG("%d", App->render->camera.x);
+
+		////////////////////PARTICLE
+
+		estela.position.x = position.x;
+		estela.position.y = position.y;
+		
+		estela.section.h *= estela.scale;
+		estela.section.w *= estela.scale;
+
+
+		estela.scale -= 0.0000000000001f;
+
+
+
+		App->render->Blit(graphics, estela.position.x, estela.position.y, &estela.section, 0);
 
 		return UPDATE_CONTINUE;
 	}
