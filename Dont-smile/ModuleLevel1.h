@@ -32,6 +32,7 @@ public:
 	bool fading = false;
 
 	void SinusBacteriaSpawning(uint win_chain, float pos_x, float pos_y, int spawn_margin );
+	void CreatePelitos();
 
 	bool jumped = false;
 	int spawn_distance;

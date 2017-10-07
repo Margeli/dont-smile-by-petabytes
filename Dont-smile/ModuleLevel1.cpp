@@ -105,6 +105,7 @@ bool ModuleLevel1::Start()
 	/*App->enemies->AddEnemy(SINUS, 600, 300);
 	App->enemies->AddEnemy(BACTERIA, 600, 350);*/
 
+	CreatePelitos();
 
 
 	return true;
@@ -243,6 +244,19 @@ void ModuleLevel1::SinusBacteriaSpawning(uint win_chain, float pos_x, float pos_
 	}
 
 
+
+
+}
+
+void ModuleLevel1::CreatePelitos()
+{
+	int x_pelito; 
+	int y_pelito;
+	for (int i = 0; i > -6000; i -= 400) {
+		x_pelito = (rand() % 1800) + 200;
+		y_pelito = rand() % 100;
+		App->enemies->AddEnemy(PELITO, x_pelito, i + y_pelito);
+	}
 }
 
 
