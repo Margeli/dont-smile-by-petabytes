@@ -59,16 +59,13 @@ public:
 	Animation idle;
 	Animation splash;
 
-	Particle dead_explosion;
+	
 	Particle bomb_explosion;
 	fPoint position;
 	fPoint saved_position;
 
 
-	uint win_chain;
 	
-	
-
 
 
 	Collider* spaceship_collider;
@@ -80,8 +77,8 @@ public:
 	uint high_score = 0;
 	uint score = 0;
 	int total_bombs;
-	Uint32 bomb_thrown;
-	Uint32 bomb_life;
+	Uint32 born;
+	Uint32 estela_time;
 	Uint32 last_bomb;
 	int spaceship_speed;
 
@@ -101,6 +98,11 @@ public:
 
 	Mix_Chunk* fx_shoot = nullptr;
 	//////
+
+	uint win_chain;
+
+	Particle estela;
+
 
 	vec_2d acceleration_vec = {0, 0};
 	vec_2d speed_vec = { 0,0 };
@@ -122,7 +124,7 @@ public:
 	int counter = 0;
 	int max = 2;
 
-	particle estela;
+	
 	
 	
 };

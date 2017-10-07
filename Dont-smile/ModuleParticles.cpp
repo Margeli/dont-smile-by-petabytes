@@ -23,7 +23,7 @@ ModuleParticles::~ModuleParticles()
 bool ModuleParticles::Start()
 {
 	LOG("Loading particles");
-		graphics = App->textures->Load("Assets/Images/Particles_Spritesheet.png");
+		graphics = App->textures->Load("Assets/Images/Raiden_Spaceship.png");
 
 	if (graphics == nullptr) {
 		LOG("Error loading particles");

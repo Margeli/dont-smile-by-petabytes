@@ -49,6 +49,22 @@ ModulePlayer::ModulePlayer()
 	splash.PushBack({ 2010,321,200,177 });
 	splash.speed = 0.3f;
 
+	
+	estela.anim.PushBack({ 774,560,199,213 });
+	estela.anim.PushBack({ 973,560,199,213 });
+	estela.anim.PushBack({ 1172,560,199,213 });
+	estela.anim.PushBack({ 1371,560,199,213 });
+	estela.anim.PushBack({ 1570,560,199,213 });
+
+	estela.anim.PushBack({ 0,0,0,0 });
+
+	estela.anim.speed = 0.2f;
+	estela.speed = { 0,0 };
+	estela.anim.loop = false;
+	estela.life = 600;
+
+
+
 }
 
 ModulePlayer::~ModulePlayer()
@@ -114,10 +130,7 @@ bool ModulePlayer::Start()
 	if (spaceship_collider==nullptr)
 	spaceship_collider = App->collision->AddCollider({ 0,0, 145, 150 }, COLLIDER_BOX, this);//COLLIDER_PLAYER
 
-	total_bombs = 3;
-	bomb_thrown = 0;
-	bomb_life = 0;
-	last_bomb = 0;
+	estela_time = SDL_GetTicks();
 
 
 
@@ -314,6 +327,12 @@ update_status ModulePlayer::Update()
 			spaceship_collider->SetPos(position.x+5, position.y);
 
 		// Draw everything --------------------------------------
+
+		if ((SDL_GetTicks() - estela_time)>40) {//time between particles
+			App->particles->AddParticle(estela, position.x, position.y, COLLIDER_BOX);
+			estela_time = SDL_GetTicks();
+		}
+
 		App->render->Blit(graphics, position.x, position.y, &(current_animation->GetCurrentFrame()));
 
 		
@@ -346,20 +365,9 @@ update_status ModulePlayer::Update()
 
 		LOG("%d", App->render->camera.x);
 
-		////////////////////PARTICLE
-
-		estela.position.x = position.x;
-		estela.position.y = position.y;
-		
-		estela.section.h *= estela.scale;
-		estela.section.w *= estela.scale;
-
-
-		estela.scale -= 0.0000000000001f;
-
 		App->level1->scroll();
 
-		App->render->Blit(graphics, estela.position.x, estela.position.y, &estela.section, 0);
+		
 
 		
 
@@ -424,7 +432,7 @@ void ModulePlayer::Dead() {
 	
 	App->player2->player2 = false;
 	App->fade->FadeToBlack((Module*)App->level1, (Module*)App->intro);
-	App->particles->AddParticle(dead_explosion, position.x, position.y, COLLIDER_EXPLOSION,0, "Assets/Audio/Fx_Player_Explosion.wav");
+	//App->particles->AddParticle(dead_explosion, position.x, position.y, COLLIDER_EXPLOSION,0, "Assets/Audio/Fx_Player_Explosion.wav");
 	App->textures->Unload(graphics);
 		
 }
