@@ -18,10 +18,7 @@ Bacteria::Bacteria(int x, int y, int count) : Enemy(x, y)
 
 	explosion.anim.PushBack({ 0, 466, 77, 68 });
 	
-	explosion.anim.PushBack({ 0,0,0,0 });
-	explosion.anim.speed = 0.2f;
-	explosion.life = 1000;
-
+	
 	
 	idle.PushBack({ 45, 29,64,65 });
 	idle.PushBack({ 114,29,64,65 });
@@ -33,11 +30,7 @@ Bacteria::Bacteria(int x, int y, int count) : Enemy(x, y)
 	idle.PushBack({ 114,29,64,65 });
 	idle.PushBack({ 45, 29,64,65 });
 
-	boost.PushBack({ 45,101,64,65 });
-
-	forward.PushBack({ 114,101,64,65 });
-	forward.PushBack({ 183,101,64,65 });
-	forward.speed = 0.5f;
+	
 	
 	animation = &forward;
 	idle.speed = 0.03f;

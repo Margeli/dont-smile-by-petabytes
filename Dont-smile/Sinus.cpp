@@ -26,7 +26,7 @@ Sinus::Sinus(int x, int y, int shoot_num) : Enemy(x, y)
 	idle.speed = 0.1f;
 
 
-	collider = App->collision->AddCollider({ 0, 0, 110, 105 }, COLLIDER_TYPE::COLLIDER_ENEMY, (Module*)App->enemies);
+	collider = App->collision->AddCollider({ 0, 0, 85, 83 }, COLLIDER_TYPE::COLLIDER_ENEMY, (Module*)App->enemies);
 
 	
 }

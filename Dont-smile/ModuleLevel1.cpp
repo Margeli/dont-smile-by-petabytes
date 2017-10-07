@@ -95,6 +95,7 @@ bool ModuleLevel1::Start()
 	graphics = App->textures->Load("Assets/Images/lvl1_tilemap.png");
 	
 	App->enemies->AddEnemy(SINUS, 600, 300);
+	App->enemies->AddEnemy(BACTERIA, 600, 350);
 
 	return true;
 }
@@ -186,7 +187,7 @@ update_status ModuleLevel1::Update()
 		if (App->player2->IsEnabled()) 
 			App->player2->spaceship_speed = 0;
 		
-	}
+	//}
 
 	//---------------
 
