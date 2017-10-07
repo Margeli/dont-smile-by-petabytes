@@ -15,6 +15,12 @@ struct vec_2d {
 	float y;
 };
 
+struct particle {
+	vec_2d position{ 0.0f,0.0f };
+	SDL_Texture* graphs = nullptr;
+	float scale = 1.0f;
+};
+
 class ModulePlayer : public Module
 {
 public:
