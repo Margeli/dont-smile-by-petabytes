@@ -212,7 +212,7 @@ update_status ModulePlayer::Update()
 
 
 	applyInertia();
-	if (!App->level1->first_animation) {// not able to move during first animation
+	if (!App->level1->jumped) {// not able to move during first animation
 		if (App->input->keyboard[SDL_SCANCODE_S] == KEY_STATE::KEY_REPEAT && App->input->keyboard[SDL_SCANCODE_W] == KEY_STATE::KEY_REPEAT) {
 			applyInertia();
 			updatePosition();

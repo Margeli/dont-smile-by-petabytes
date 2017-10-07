@@ -70,6 +70,7 @@ bool ModuleLevel1::Start()
 	}
 	else {
 
+
 		App->player->position.x = 71; //position if there are 2 players
 		App->player->position.y = 150;
 	}
@@ -101,6 +102,7 @@ bool ModuleLevel1::Start()
 	last_spawn_sinus = SDL_GetTicks();
 	last_spawn_bacteria = SDL_GetTicks();
 	srand(time(NULL));
+	jumped = false;
 
 	
 	/*App->enemies->AddEnemy(SINUS, 300, -5400);/*
@@ -164,19 +166,23 @@ void ModuleLevel1::scroll()
 // Update: draw background
 update_status ModuleLevel1::Update()
 {
-	if (App->player->position.y >= -5000) {
+	if (App->player->position.y >= -4000) {
 		SinusBacteriaSpawning(App->player->win_chain, App->player->position.x, App->player->position.y, spawn_distance);
 	}
 	
-	if (App->player->position.y >= -4000) {
+	if (App->player->position.y <= -4000) {
 		jumped = true;
 	}
 		
 		
-		if (jumped) {
+	if (jumped) {
+		App->player->position.y += App->player->acceleration_vec.y;
 
-		App->player->win_chain++;
-		
+
+
+
+			App->player->win_chain++;
+
 	}
 
 
@@ -237,7 +243,7 @@ void ModuleLevel1::SinusBacteriaSpawning(uint win_chain, float pos_x, float pos_
 	if ((spawntime_sinus - difficulty_time) < counter_spawn_timer) {
 	
 		App->enemies->AddEnemy(SINUS, x, y);
-		//counter_spawn_timer = 0; //reestart timer
+		counter_spawn_timer = 0; //reestart timer
 		last_spawn_sinus = SDL_GetTicks();
 	}
 
@@ -247,7 +253,7 @@ void ModuleLevel1::SinusBacteriaSpawning(uint win_chain, float pos_x, float pos_
 	if ((spawntime_bacteria - difficulty_time) < counter_spawn_timer) {
 
 		App->enemies->AddEnemy(BACTERIA, x, y);
-		//counter_spawn_timer = 0; //reestart timer
+		counter_spawn_timer = 0; //reestart timer
 		last_spawn_bacteria= SDL_GetTicks();
 	}
 
