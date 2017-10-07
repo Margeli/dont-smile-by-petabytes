@@ -90,7 +90,12 @@ public:
 	Mix_Chunk* fx_shoot = nullptr;
 	//////
 
-	vec_2d speed_vec = {0, 0};
+	vec_2d acceleration_vec = {0, 0};
+	vec_2d speed_vec = { 0,0 };
+
+	void check_map_limits();
+
+	void move_camera_with_player();
 
 	void updatePosition();
 

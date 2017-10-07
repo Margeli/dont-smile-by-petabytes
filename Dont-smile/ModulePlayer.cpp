@@ -107,39 +107,70 @@ bool ModulePlayer::Start()
 	return ret;
 }
 
+void ModulePlayer::check_map_limits()
+{
+
+	if (position.x < 10)
+		position.x = 10;
+
+	if (position.x >(MAP1_WIDTH - 170))
+		position.x = (MAP1_WIDTH - 170);
+
+	if (position.y < -MAP1_HEIGHT + (SCREEN_HEIGHT+20))
+		position.y = (-MAP1_HEIGHT + (SCREEN_HEIGHT + 20));
+
+	//if (position.x >(MAP1_WIDTH - 170))
+	//	position.x = (MAP1_WIDTH - 170);
+}
+
+void ModulePlayer::move_camera_with_player()
+{
+	if ((App->render->camera.x + position.x) < 0)  //Camera Left
+		App->render->camera.x = -position.x;
+
+	if ((position.x) > ((SCREEN_WIDTH - 150) - App->render->camera.x))  //Camera Right
+		App->render->camera.x = -(position.x - (SCREEN_WIDTH - 150));
+
+	if ((App->render->camera.y + position.y) < 0)  //Camera Left
+		App->render->camera.y = -position.y;
+
+	if ((position.y) > ((SCREEN_HEIGHT - 150) - App->render->camera.y))  //Camera Right
+		App->render->camera.y = -(position.y - (SCREEN_HEIGHT - 150));
+}
+
 void ModulePlayer::updatePosition()
 {
 	
-	position.x += speed_vec.x;
-	position.y -= speed_vec.y;
+	position.x += acceleration_vec.x;
+	position.y -= acceleration_vec.y;
 	
 }
 
 void ModulePlayer::applyInertia()
 {
-	if (speed_vec.y > 0 && speed_vec.y < friction) {
-		speed_vec.y = 0;
+	if (acceleration_vec.y > 0 && acceleration_vec.y < friction) {
+		acceleration_vec.y = 0;
 	}
-	else if (speed_vec.y < 0 && speed_vec.y > friction) {
-		speed_vec.y = 0;
+	else if (acceleration_vec.y < 0 && acceleration_vec.y > friction) {
+		acceleration_vec.y = 0;
 	}
-	else if (speed_vec.y > 0) {
-		speed_vec.y -= friction;
+	else if (acceleration_vec.y > 0) {
+		acceleration_vec.y -= friction;
 	}
-	else if (speed_vec.y < 0) {
-		speed_vec.y += friction;
+	else if (acceleration_vec.y < 0) {
+		acceleration_vec.y += friction;
 	}
-	if (speed_vec.x > 0 && speed_vec.x < friction) {
-		speed_vec.x = 0;
+	if (acceleration_vec.x > 0 && acceleration_vec.x < friction) {
+		acceleration_vec.x = 0;
 	}
-	else if (speed_vec.x < 0 && speed_vec.x > friction) {
-		speed_vec.x = 0;
+	else if (acceleration_vec.x < 0 && acceleration_vec.x > friction) {
+		acceleration_vec.x = 0;
 	}
-	else if (speed_vec.x > 0) {
-		speed_vec.x -= friction;
+	else if (acceleration_vec.x > 0) {
+		acceleration_vec.x -= friction;
 	}
-	else if (speed_vec.x < 0) {
-		speed_vec.x += friction;
+	else if (acceleration_vec.x < 0) {
+		acceleration_vec.x += friction;
 	}
 }
 
@@ -157,8 +188,8 @@ update_status ModulePlayer::Update()
 		else if (App->input->keyboard[SDL_SCANCODE_S] == KEY_STATE::KEY_REPEAT || App->input->gamepad[1] == KEY_STATE::KEY_REPEAT) //---DOWN
 		{
 			
-			if (speed_vec.y > -max_speed && speed_vec.y < max_speed)
-				speed_vec.y -= acceleration;
+			if (acceleration_vec.y > -max_speed && acceleration_vec.y < max_speed)
+				acceleration_vec.y -= acceleration;
 			updatePosition();
 			//App->render->camera.y += 4;
 
@@ -166,8 +197,8 @@ update_status ModulePlayer::Update()
 		}
 		else if (App->input->keyboard[SDL_SCANCODE_W] == KEY_STATE::KEY_REPEAT || App->input->gamepad[0] == KEY_STATE::KEY_REPEAT)//---UP
 		{
-			if (speed_vec.y > -max_speed && speed_vec.y < max_speed)
-				speed_vec.y += acceleration;
+			if (acceleration_vec.y > -max_speed && acceleration_vec.y < max_speed)
+				acceleration_vec.y += acceleration;
 			updatePosition();
 			//App->render->camera.y -= camera_speed_module;
 		}
@@ -184,16 +215,16 @@ update_status ModulePlayer::Update()
 		}
 		else if (App->input->keyboard[SDL_SCANCODE_D] == KEY_STATE::KEY_REPEAT || App->input->gamepad[2] == KEY_STATE::KEY_REPEAT)//---RIGHT
 		{
-			if (speed_vec.x > -max_speed && speed_vec.x < max_speed)
-			speed_vec.x += acceleration;
+			if (acceleration_vec.x > -max_speed && acceleration_vec.x < max_speed)
+			acceleration_vec.x += acceleration;
 			updatePosition();
 			//App->render->camera.x -= camera_speed_module;
 		}
 		else if (App->input->keyboard[SDL_SCANCODE_A] == KEY_STATE::KEY_REPEAT || App->input->gamepad[3] == KEY_STATE::KEY_REPEAT)//---LEFT
 
 		{
-			if (speed_vec.x > -max_speed && speed_vec.x < max_speed)
-			speed_vec.x -= acceleration;
+			if (acceleration_vec.x > -max_speed && acceleration_vec.x < max_speed)
+			acceleration_vec.x -= acceleration;
 			updatePosition();
 			//App->render->camera.x += 4;
 		}
@@ -286,6 +317,13 @@ update_status ModulePlayer::Update()
 		if (godmode) {
 			App->fonts->BlitText(0, 1, yellow_font_score, godmode_activated);// Yellow "G" in left upper corner when godmode activated.
 		}
+
+
+		move_camera_with_player();
+
+		check_map_limits();
+
+		LOG("%d",App->render->camera.x)
 
 		return UPDATE_CONTINUE;
 	}

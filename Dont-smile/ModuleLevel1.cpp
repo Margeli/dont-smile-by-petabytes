@@ -126,17 +126,7 @@ bool ModuleLevel1::CleanUp()
 // Update: draw background
 update_status ModuleLevel1::Update()
 {
-	if (App->render->camera.y <= 0)
-		App->render->camera.y = 0;
 
-	if (App->render->camera.y > 6399)
-		App->render->camera.y = 6399;
-
-	if (App->render->camera.x > 00)
-		App->render->camera.x = 0;
-
-	if (App->render->camera.x <= -1000)
-		App->render->camera.x = -1000;
 
 	//if (App->render->camera.y < 100) {
 	//	
@@ -166,7 +156,7 @@ update_status ModuleLevel1::Update()
 	//App->render->Blit(graphics, -50, -150, &ship_launcher, 1.8f);
 
 
-	if (App->player->position.y <= -2735) {
+	if (App->player->position.y <= -2735) {       //////////------------------------------------
 
 		scroll_speed = 0;
  		boss_music = App->audio->Load_Music("Assets/Audio/Boss_Music.ogg");
@@ -181,19 +171,12 @@ update_status ModuleLevel1::Update()
 
 		if (App->player2->IsEnabled()) 
 			App->player2->spaceship_speed = 0;
-
-
-
-	/*if (App->input->keyboard[SDL_SCANCODE_TAB] && fading == false) {
-	
-		App->fade->FadeToBlack(this, App->stageCompleted);
-		fading = true;
-		*/
-
-
 		
 	}
 
+	//---------------
+
+	
 
 
 	return UPDATE_CONTINUE;
