@@ -76,8 +76,8 @@ bool ModulePlayer::CleanUp()
 	LOG("Unloading player");
 
 	App->textures->Unload(graphics);
-	App->fonts->UnLoad(yellow_font_score);
-	App->fonts->UnLoad(red_font_score);
+	/*App->fonts->UnLoad(yellow_font_score);
+	App->fonts->UnLoad(red_font_score);*/
 	/*if (spaceship_collider != nullptr) {
 	spaceship_collider->to_delete = true;
 	}*/
@@ -117,10 +117,10 @@ bool ModulePlayer::Start()
 	}
 	current_animation = &idle;
 	
-	godmode_activated = " G ";
+	/*godmode_activated = " G ";
 	user_interface = "    1UP   HI.SCORE    2UP ";
 	red_font_score = App->fonts->Load("Assets/Images/Font.png", "> ?@ABCDEFGHIJKLMNOPQRSTUVWXYZ!¡?_*#$%&'()x+.-,;[].{.}/0123456789:", 3);
-	yellow_font_score = App->fonts->Load("Assets/Images/Font.png", "> ?@ABCDEFGHIJKLMNOPQRSTUVWXYZ!¡?_*#$%&'()x+.-,;[].{.}/0123456789:", 3);
+	yellow_font_score = App->fonts->Load("Assets/Images/Font.png", "> ?@ABCDEFGHIJKLMNOPQRSTUVWXYZ!¡?_*#$%&'()x+.-,;[].{.}/0123456789:", 3);*/
 	// * -> "
 	// [ -> tm
 	//	]. -> Pts
@@ -341,25 +341,25 @@ update_status ModulePlayer::Update()
 		
 		// Draw UI (score) --------------------------------------
 
-		if (score > high_score)
-			high_score = score;
+		//if (score > high_score)
+		//	high_score = score;
 
-		if (App->player2->score > high_score&&App->player2->IsEnabled()) {
-			high_score = App->player2->score;
-		
-		}
-		
+		//if (App->player2->score > high_score&&App->player2->IsEnabled()) {
+		//	high_score = App->player2->score;
+		//
+		//}
+		//
 
 
-		sprintf_s(score_text, 10, "%8d", score);
-		sprintf_s(high_score_text, 10, "%7d", high_score);
+		//sprintf_s(score_text, 10, "%8d", score);
+		//sprintf_s(high_score_text, 10, "%7d", high_score);
 
-		App->fonts->BlitText(0, 1, red_font_score, user_interface);
-		App->fonts->BlitText(0, 9, yellow_font_score, score_text);
-		App->fonts->BlitText(88, 9, yellow_font_score, high_score_text);
-		if (godmode) {
-			App->fonts->BlitText(0, 1, yellow_font_score, godmode_activated);// Yellow "G" in left upper corner when godmode activated.
-		}
+		//App->fonts->BlitText(0, 1, red_font_score, user_interface);
+		//App->fonts->BlitText(0, 9, yellow_font_score, score_text);
+		//App->fonts->BlitText(88, 9, yellow_font_score, high_score_text);
+		//if (godmode) {
+		//	App->fonts->BlitText(0, 1, yellow_font_score, godmode_activated);// Yellow "G" in left upper corner when godmode activated.
+		//}
 
 
 		move_camera_with_player();

@@ -73,9 +73,9 @@ bool ModuleIntro::Start()
 	}
 
 
-	user_interface = "    1UP   HI-SCORE    2UP ";
-	red_font_score = App->fonts->Load("Assets/Images/Font.png", "> ?@ABCDEFGHIJKLMNOPQRSTUVWXYZ!¡?_*#$%&'()x+.-,;[].{.}./0123456789:", 3);
-	yellow_font_score = App->fonts->Load("Assets/Images/Font.png", "> ?@ABCDEFGHIJKLMNOPQRSTUVWXYZ!¡?_*#$%&'()x+.-,;[].{.}./0123456789:", 3);
+	//user_interface = "    1UP   HI-SCORE    2UP ";
+	//red_font_score = App->fonts->Load("Assets/Images/Font.png", "> ?@ABCDEFGHIJKLMNOPQRSTUVWXYZ!¡?_*#$%&'()x+.-,;[].{.}./0123456789:", 3);
+	//yellow_font_score = App->fonts->Load("Assets/Images/Font.png", "> ?@ABCDEFGHIJKLMNOPQRSTUVWXYZ!¡?_*#$%&'()x+.-,;[].{.}./0123456789:", 3);
 
 
 	return true;
@@ -89,10 +89,10 @@ bool ModuleIntro::CleanUp()
 
 	App->textures->Unload(graphics);
 	
-	
+	/*
 	App->fonts->UnLoad(red_font_score);
 	App->fonts->UnLoad(yellow_font_score);
-	
+	*/
 
 	return true;
 }
@@ -106,10 +106,10 @@ update_status ModuleIntro::Update()
 
 	
 	
-	App->fonts->BlitText(0, 1, red_font_score, user_interface);
+	/*App->fonts->BlitText(0, 1, red_font_score, user_interface);
 	
 	App->fonts->BlitText(88, 9, yellow_font_score, App->player->high_score_text);
-
+*/
 	if (App->input->keyboard[SDL_SCANCODE_1]|| App->input->gamepad[6] == KEY_STATE::KEY_REPEAT) {
 		
 		App->player2->player2=false;

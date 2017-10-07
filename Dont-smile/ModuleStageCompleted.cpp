@@ -38,10 +38,10 @@ bool ModuleStageCompleted::Start()
 	App->intro->Disable();
 	App->player->Disable();
 
-	user_interface = "    1UP   HI-SCORE    2UP ";
+	/*user_interface = "    1UP   HI-SCORE    2UP ";
 	red_font_score = App->fonts->Load("Assets/Images/Font.png", "> ?@ABCDEFGHIJKLMNOPQRSTUVWXYZ!¡?_*#$%&'()x+.-,;[].{.}./0123456789:", 3);
 	yellow_font_score =App->fonts->Load("Assets/Images/Font.png", "> ?@ABCDEFGHIJKLMNOPQRSTUVWXYZ!¡?_*#$%&'()x+.-,;[].{.}./0123456789:", 3);
-
+*/
 	
 
 	App->render->camera.x = 0;
@@ -69,8 +69,8 @@ bool ModuleStageCompleted::CleanUp()
 	if (graphics != nullptr)	App->textures->Unload(graphics);
 	if (music_stage_cleared != nullptr) 	App->audio->Unload_Music(music_stage_cleared); 
 
-	App->fonts->UnLoad(red_font_score);
-	App->fonts->UnLoad(yellow_font_score);
+	//App->fonts->UnLoad(red_font_score);
+	//App->fonts->UnLoad(yellow_font_score);
 
 	App->player->Disable();
 	App->player2->Disable();
@@ -95,14 +95,14 @@ update_status ModuleStageCompleted::Update()
 	App->render->Blit(graphics, 0, 0, &background);
 
 
-	sprintf_s(App->player->score_text, 10, "%8d", App->player->score);
-	sprintf_s(App->player->high_score_text, 10, "%7d", App->player->high_score);
-	sprintf_s(App->player2->score_text, 10, "%8d", App->player2->score);
+	//sprintf_s(App->player->score_text, 10, "%8d", App->player->score);
+	//sprintf_s(App->player->high_score_text, 10, "%7d", App->player->high_score);
+	//sprintf_s(App->player2->score_text, 10, "%8d", App->player2->score);
 
-	App->fonts->BlitText(0, 1, red_font_score,user_interface);
-	App->fonts->BlitText(0, 9, yellow_font_score, App->player->score_text);
-	App->fonts->BlitText(88, 9, yellow_font_score, App->player->high_score_text);
-	App->fonts->BlitText(143, 10,yellow_font_score, App->player2->score_text);
+	//App->fonts->BlitText(0, 1, red_font_score,user_interface);
+	//App->fonts->BlitText(0, 9, yellow_font_score, App->player->score_text);
+	//App->fonts->BlitText(88, 9, yellow_font_score, App->player->high_score_text);
+	//App->fonts->BlitText(143, 10,yellow_font_score, App->player2->score_text);
 
 	if (((App->input->gamepad[6] == KEY_STATE::KEY_REPEAT) || (App->input->keyboard[SDL_SCANCODE_TAB])) && App->fade->IsFading() == false) {
 
