@@ -16,7 +16,9 @@
 #include "ModuleEnemies.h"
 #include "ModulePowerUps.h"
 
-
+#include <time.h>  
+#include <stdlib.h>  
+#include "SDL/include/SDL_timer.h"
 
 ModuleLevel1::ModuleLevel1()
 {
@@ -92,9 +94,16 @@ bool ModuleLevel1::Start()
 	//App->audio->Play_Music(music_lvl1); 
 	
 	graphics = App->textures->Load("Assets/Images/lvl1_tilemap.png");
+
+	spawn_distance = 900;
+
 	
-	App->enemies->AddEnemy(SINUS, 600, 300);
-	App->enemies->AddEnemy(BACTERIA, 600, 350);
+	last_spawn_sinus = SDL_GetTicks();//
+	last_spawn_bacteria = SDL_GetTicks();
+	srand(time(NULL));
+	
+	/*App->enemies->AddEnemy(SINUS, 600, 300);
+	App->enemies->AddEnemy(BACTERIA, 600, 350);*/
 
 
 
@@ -128,6 +137,7 @@ bool ModuleLevel1::CleanUp()
 void ModuleLevel1::scroll()
 {
 
+
 	if (App->player->position.y > inferior_limit) {
 		App->player->position.y = inferior_limit;
 	}
@@ -146,15 +156,18 @@ void ModuleLevel1::scroll()
 	}
 }
 
+	
+
+
 // Update: draw background
 update_status ModuleLevel1::Update()
 {
-
+	SinusBacteriaSpawning(App->player->win_chain, App->player->position.x, App->player->position.y, spawn_distance);
 	
 	if (jumped) {
 
 		App->player->win_chain++;
-
+		
 	}
 
 
@@ -203,3 +216,63 @@ update_status ModuleLevel1::Update()
 
 	return UPDATE_CONTINUE;
 }
+
+
+
+void ModuleLevel1::SinusBacteriaSpawning(uint win_chain, float pos_x, float pos_y, int spawn_margin) {
+
+	
+
+	int x = pos_x;
+	int y =pos_y - spawn_margin;
+
+	difficulty_time = win_chain * 150;	
+
+	Uint32 spawntime_sinus=2500;
+	counter_spawn_timer = SDL_GetTicks() - last_spawn_sinus;
+
+	if ((spawntime_sinus - difficulty_time) < counter_spawn_timer) {
+	
+		App->enemies->AddEnemy(SINUS, x, y);
+		//counter_spawn_timer = 0; //reestart timer
+		last_spawn_sinus = SDL_GetTicks();
+	}
+
+	Uint32 spawntime_bacteria = 1500;
+	counter_spawn_timer = SDL_GetTicks() - last_spawn_bacteria;
+
+	if ((spawntime_bacteria - difficulty_time) < counter_spawn_timer) {
+
+		App->enemies->AddEnemy(BACTERIA, x, y);
+		//counter_spawn_timer = 0; //reestart timer
+		last_spawn_bacteria= SDL_GetTicks();
+	}
+
+
+
+	//	
+	//	1250-(win_chain*150);//starts to 2s and ends at 1s ratio spawning
+	//counter_spawn_timer= SDL_GetTicks()-last_spawn;//current time-lvl1 creation time =time since level 1 starts spawning   time_level_creation
+	//int index;
+	//if (difficulty_time < counter_spawn_timer) {
+	//	index = rand() % 100;
+	//	if (index < 70) {//70%
+	//		App->enemies->AddEnemy(PELITO, x, y);
+
+	//	}
+	//	else if (index >= 70 && index > 85) {//15%
+	//		App->enemies->AddEnemy(BACTERIA, x, y);
+	//	}
+	//	else if (index<=85) //15%
+	//	{
+	//		App->enemies->AddEnemy(SINUS, x, y);
+	//	}
+	//	index = 0;
+	//	counter_spawn_timer = 0; //reestart timer
+	//	last_spawn = SDL_GetTicks();
+	//}
+}
+
+
+
+
