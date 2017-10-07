@@ -57,6 +57,7 @@ public:
 	Animation* current_animation = nullptr;
 
 	Animation idle;
+	Animation splash;
 
 	Particle dead_explosion;
 	Particle bomb_explosion;

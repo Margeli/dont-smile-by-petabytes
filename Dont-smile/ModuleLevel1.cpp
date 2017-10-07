@@ -98,7 +98,7 @@ bool ModuleLevel1::Start()
 	spawn_distance = 900;
 
 	
-	last_spawn_sinus = SDL_GetTicks();//
+	last_spawn_sinus = SDL_GetTicks();
 	last_spawn_bacteria = SDL_GetTicks();
 	srand(time(NULL));
 	
