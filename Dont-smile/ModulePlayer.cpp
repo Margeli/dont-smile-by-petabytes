@@ -61,7 +61,7 @@ ModulePlayer::ModulePlayer()
 	estela.anim.speed = 0.2f;
 	estela.speed = { 0,0 };
 	estela.anim.loop = false;
-	estela.life = 600;
+	estela.life = 350;
 
 
 
@@ -328,8 +328,8 @@ update_status ModulePlayer::Update()
 
 		// Draw everything --------------------------------------
 
-		if ((SDL_GetTicks() - estela_time)>40) {//time between particles
-			App->particles->AddParticle(estela, position.x, position.y, COLLIDER_BOX);
+		if ((SDL_GetTicks() - estela_time)>30) {//time between particles
+			App->particles->AddParticle(estela, position.x-25, position.y-30, COLLIDER_BOX);
 			estela_time = SDL_GetTicks();
 		}
 
