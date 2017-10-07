@@ -94,7 +94,7 @@ bool ModuleLevel1::Start()
 	
 	graphics = App->textures->Load("Assets/Images/lvl1_tilemap.png");
 	
-	App->enemies->AddEnemy(SINUS, 500, 150);
+	App->enemies->AddEnemy(SINUS, 600, 300);
 
 	return true;
 }
@@ -138,6 +138,16 @@ update_status ModuleLevel1::Update()
 	if (App->render->camera.x <= -1000)
 		App->render->camera.x = -1000;
 
+
+	if (jumped) {
+
+		App->player->win_chain++;
+	
+	}
+
+
+
+
 	//if (App->render->camera.y < 100) {
 	//	
 	//	App->player->position.y += 1;
@@ -166,13 +176,13 @@ update_status ModuleLevel1::Update()
 	//App->render->Blit(graphics, -50, -150, &ship_launcher, 1.8f);
 
 
-	if (App->player->position.y <= -2735) {
+	/*if (App->player->position.y <= -2735) {
 
 		scroll_speed = 0;
  		boss_music = App->audio->Load_Music("Assets/Audio/Boss_Music.ogg");
 		if (!boss_music) {
 			LOG("Error loading boss music: %s", Mix_GetError)
-		}
+		}*/
 		/*App->audio->Play_Music(boss_music);
 		App->player->spaceship_speed = 0;
 <<<<<<< HEAD

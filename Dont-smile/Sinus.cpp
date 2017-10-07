@@ -18,10 +18,12 @@ Sinus::Sinus(int x, int y, int shoot_num) : Enemy(x, y)
 		LOG("Error loading GreenShooter's textures. SDL Error: %s", SDL_GetError());
 	}
 
-	idle.PushBack({ 13,205,113,110 });
-	
+	idle.PushBack({ 9,232,87,86 });
+	idle.PushBack({ 97,232,87,86 });
+	idle.PushBack({ 183,232,87,86 });
+	idle.PushBack({ 269,232,87,86 });
 
-	idle.speed = 0.3f;
+	idle.speed = 0.1f;
 
 
 	collider = App->collision->AddCollider({ 0, 0, 110, 105 }, COLLIDER_TYPE::COLLIDER_ENEMY, (Module*)App->enemies);
