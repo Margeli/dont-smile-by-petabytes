@@ -22,8 +22,8 @@ ModuleIntro::ModuleIntro()
 {
 	background.x = 0;
 	background.y = 0;
-	background.w = 224;
-	background.h = 256;
+	background.w = SCREEN_WIDTH;
+	background.h = SCREEN_HEIGHT;
 /*
 	loading.PushBack({ 449,257,224,256 });
 	loading.PushBack({ 225,257,224,256 });
@@ -114,7 +114,7 @@ update_status ModuleIntro::Update()
 		
 		App->player2->player2=false;
 		
-		App->fade->FadeToBlack(this, App->level1, 0.0f);
+		App->fade->FadeToBlack(this, App->level1, 2.0f);
 		
 	}
 	else if (App->input->keyboard[SDL_SCANCODE_2]) {
