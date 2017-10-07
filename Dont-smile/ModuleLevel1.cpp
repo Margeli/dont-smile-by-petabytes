@@ -87,11 +87,11 @@ bool ModuleLevel1::Start()
 	
 	LOG("Loading level 1");
 
-	music_lvl1 = App->audio->Load_Music("Assets/Audio/00_Raiden.ogg");// COMMENT TO STOP MUSIC
+	music_lvl1 = App->audio->Load_Music("Assets/Audio/music.ogg");// COMMENT TO STOP MUSIC
 	if (!music_lvl1) {
 	LOG("Error loading lvl1 music: %s",Mix_GetError)
 	}
-	//App->audio->Play_Music(music_lvl1); 
+	App->audio->Play_Music(music_lvl1); 
 	
 	graphics = App->textures->Load("Assets/Images/lvl1_tilemap.png");
 
