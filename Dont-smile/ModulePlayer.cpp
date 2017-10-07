@@ -50,6 +50,17 @@ ModulePlayer::ModulePlayer()
 	splash.speed = 0.3f;
 
 	
+	dead.PushBack({ 935,0,205,191 });
+	dead.PushBack({ 1140,0,205,191 });
+	dead.PushBack({ 1345,0,205,191 });
+	dead.PushBack({ 1550,0,205,191 });
+	dead.PushBack({ 1755,0,205,191 });
+	dead.PushBack({ 1960,0,205,191 });
+	dead.speed = 1.0f;
+	dead.loop = false;
+	
+	
+	
 	estela.anim.PushBack({ 774,560,199,213 });
 	estela.anim.PushBack({ 973,560,199,213 });
 	estela.anim.PushBack({ 1172,560,199,213 });
@@ -408,7 +419,10 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2)
 		}*/
 	case COLLIDER_ENEMY:
 		if (c1 == spaceship_collider && destroyed == false && App->fade->IsFading() == false && godmode==false ) {
+		
+			current_animation = &dead;
 			Dead();
+			
 		}
 
 	}
@@ -416,13 +430,13 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2)
 
 void ModulePlayer::Dead() {
 
-	
+	/*
 	Red_Powerup_Lvl = 0;
 	M_Powerup_Lvl = 0;
 	Blue_Powerup_Lvl = 0;
 	sprintf_s(score_text, 10, "%8d", score);
 	sprintf_s(high_score_text, 10, "%7d", high_score);
-
+*/
 	//if (App->player2->IsEnabled()) {
 	//	App->player2->Red_Powerup_Lvl = 0;
 	//	App->player2->M_Powerup_Lvl = 0;
@@ -434,8 +448,9 @@ void ModulePlayer::Dead() {
 	destroyed = true;
 	
 	App->player2->player2 = false;
+	
+	
 	App->fade->FadeToBlack((Module*)App->level1, (Module*)App->intro);
-	//App->particles->AddParticle(dead_explosion, position.x, position.y, COLLIDER_EXPLOSION,0, "Assets/Audio/Fx_Player_Explosion.wav");
 	App->textures->Unload(graphics);
 		
 }

@@ -58,6 +58,7 @@ public:
 
 	Animation idle;
 	Animation splash;
+	Animation dead;
 
 	
 	Particle bomb_explosion;
