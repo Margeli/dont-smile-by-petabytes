@@ -51,6 +51,17 @@ ModulePlayer::ModulePlayer()
 	splash.loop = false;
 
 	
+	dead.PushBack({ 935,0,205,191 });
+	dead.PushBack({ 1140,0,205,191 });
+	dead.PushBack({ 1345,0,205,191 });
+	dead.PushBack({ 1550,0,205,191 });
+	dead.PushBack({ 1755,0,205,191 });
+	dead.PushBack({ 1960,0,205,191 });
+	dead.speed = 1.0f;
+	dead.loop = false;
+	
+	
+	
 	estela.anim.PushBack({ 774,560,199,213 });
 	estela.anim.PushBack({ 973,560,199,213 });
 	estela.anim.PushBack({ 1172,560,199,213 });
@@ -77,8 +88,8 @@ bool ModulePlayer::CleanUp()
 	LOG("Unloading player");
 
 	App->textures->Unload(graphics);
-	App->fonts->UnLoad(yellow_font_score);
-	App->fonts->UnLoad(red_font_score);
+	/*App->fonts->UnLoad(yellow_font_score);
+	App->fonts->UnLoad(red_font_score);*/
 	/*if (spaceship_collider != nullptr) {
 	spaceship_collider->to_delete = true;
 	}*/
@@ -118,10 +129,10 @@ bool ModulePlayer::Start()
 	}
 	current_animation = &idle;
 	
-	godmode_activated = " G ";
+	/*godmode_activated = " G ";
 	user_interface = "    1UP   HI.SCORE    2UP ";
 	red_font_score = App->fonts->Load("Assets/Images/Font.png", "> ?@ABCDEFGHIJKLMNOPQRSTUVWXYZ!¡?_*#$%&'()x+.-,;[].{.}/0123456789:", 3);
-	yellow_font_score = App->fonts->Load("Assets/Images/Font.png", "> ?@ABCDEFGHIJKLMNOPQRSTUVWXYZ!¡?_*#$%&'()x+.-,;[].{.}/0123456789:", 3);
+	yellow_font_score = App->fonts->Load("Assets/Images/Font.png", "> ?@ABCDEFGHIJKLMNOPQRSTUVWXYZ!¡?_*#$%&'()x+.-,;[].{.}/0123456789:", 3);*/
 	// * -> "
 	// [ -> tm
 	//	]. -> Pts
@@ -285,7 +296,7 @@ update_status ModulePlayer::Update()
 
 
 
-		if (App->input->keyboard[SDL_SCANCODE_F2] == KEY_STATE::KEY_DOWN || App->input->gamepad[5] == KEY_STATE::KEY_REPEAT)//GOD MODE (press right stick on controller)
+		if (App->input->keyboard[SDL_SCANCODE_F1] == KEY_STATE::KEY_DOWN || App->input->gamepad[5] == KEY_STATE::KEY_REPEAT)//GOD MODE (press right stick on controller)
 
 		{
 			if (!godmode) {
@@ -301,7 +312,6 @@ update_status ModulePlayer::Update()
 			App->fade->FadeToBlack(this, App->stageCompleted);
 
 		}
-
 	}
 
 		if (spaceship_collider != nullptr)
@@ -332,25 +342,25 @@ update_status ModulePlayer::Update()
 		
 		// Draw UI (score) --------------------------------------
 
-		if (score > high_score)
-			high_score = score;
+		//if (score > high_score)
+		//	high_score = score;
 
-		if (App->player2->score > high_score&&App->player2->IsEnabled()) {
-			high_score = App->player2->score;
-		
-		}
-		
+		//if (App->player2->score > high_score&&App->player2->IsEnabled()) {
+		//	high_score = App->player2->score;
+		//
+		//}
+		//
 
 
-		sprintf_s(score_text, 10, "%8d", score);
-		sprintf_s(high_score_text, 10, "%7d", high_score);
+		//sprintf_s(score_text, 10, "%8d", score);
+		//sprintf_s(high_score_text, 10, "%7d", high_score);
 
-		App->fonts->BlitText(0, 1, red_font_score, user_interface);
-		App->fonts->BlitText(0, 9, yellow_font_score, score_text);
-		App->fonts->BlitText(88, 9, yellow_font_score, high_score_text);
-		if (godmode) {
-			App->fonts->BlitText(0, 1, yellow_font_score, godmode_activated);// Yellow "G" in left upper corner when godmode activated.
-		}
+		//App->fonts->BlitText(0, 1, red_font_score, user_interface);
+		//App->fonts->BlitText(0, 9, yellow_font_score, score_text);
+		//App->fonts->BlitText(88, 9, yellow_font_score, high_score_text);
+		//if (godmode) {
+		//	App->fonts->BlitText(0, 1, yellow_font_score, godmode_activated);// Yellow "G" in left upper corner when godmode activated.
+		//}
 
 
 			if (!App->level1->jumped)
@@ -402,7 +412,10 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2)
 		}*/
 	case COLLIDER_ENEMY:
 		if (c1 == spaceship_collider && destroyed == false && App->fade->IsFading() == false && godmode==false ) {
+		
+			current_animation = &dead;
 			Dead();
+			
 		}
 
 	}
@@ -410,13 +423,13 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2)
 
 void ModulePlayer::Dead() {
 
-	
+	/*
 	Red_Powerup_Lvl = 0;
 	M_Powerup_Lvl = 0;
 	Blue_Powerup_Lvl = 0;
 	sprintf_s(score_text, 10, "%8d", score);
 	sprintf_s(high_score_text, 10, "%7d", high_score);
-
+*/
 	//if (App->player2->IsEnabled()) {
 	//	App->player2->Red_Powerup_Lvl = 0;
 	//	App->player2->M_Powerup_Lvl = 0;
@@ -428,8 +441,9 @@ void ModulePlayer::Dead() {
 	destroyed = true;
 	
 	App->player2->player2 = false;
+	
+	
 	App->fade->FadeToBlack((Module*)App->level1, (Module*)App->intro);
-	//App->particles->AddParticle(dead_explosion, position.x, position.y, COLLIDER_EXPLOSION,0, "Assets/Audio/Fx_Player_Explosion.wav");
 	App->textures->Unload(graphics);
 		
 }

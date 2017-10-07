@@ -58,6 +58,7 @@ public:
 
 	Animation idle;
 	Animation splash;
+	Animation dead;
 
 	
 	Particle bomb_explosion;
@@ -87,7 +88,8 @@ public:
 	char *user_interface;
 	char *godmode_activated;
 
-	int red_font_score = 0;
+	int 
+_score = 0;
 	int yellow_font_score = 0;
 
 	uint Red_Powerup_Lvl;

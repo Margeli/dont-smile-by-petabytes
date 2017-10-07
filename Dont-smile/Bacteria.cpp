@@ -36,13 +36,12 @@ Bacteria::Bacteria(int x, int y, int count) : Enemy(x, y)
 	
 }
 
-
 void Bacteria::Move() {
 
 
 	position.y += speed;
 
-	collider->SetPos(position.x*SCREEN_SIZE , position.y*SCREEN_SIZE);
+	collider->SetPos(position.x, position.y);
 }
 
 

@@ -41,18 +41,18 @@ void Sinus::Move() {
 		if (iterator == -1.0f) {
 			to_negative = false;
 		}
-	
+
 	}
 	else {
 		iterator += 0.1f;
 		if (iterator == 1.0f) {
 			to_negative = true;
 		}
-	
 	}
+	
 	animation = &idle;
-		position.y += speed;
-		position.x +=10* sin(iterator);
+	position.y += speed;
+	position.x += 10 * sin(iterator);
 
 }
 
