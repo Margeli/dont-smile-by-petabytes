@@ -332,6 +332,7 @@ update_status ModulePlayer::Update()
 
 		}
 
+
 		
 
 		if (spaceship_collider != nullptr)
