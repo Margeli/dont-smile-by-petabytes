@@ -315,7 +315,7 @@ update_status ModulePlayer::Update()
 	}
 
 
-		if (App->input->keyboard[SDL_SCANCODE_F2] == KEY_STATE::KEY_DOWN || App->input->gamepad[5] == KEY_STATE::KEY_REPEAT)//GOD MODE (press right stick on controller)
+		if (App->input->keyboard[SDL_SCANCODE_F1] == KEY_STATE::KEY_DOWN || App->input->gamepad[5] == KEY_STATE::KEY_REPEAT)//GOD MODE (press right stick on controller)
 
 		{
 			if (!godmode) {
