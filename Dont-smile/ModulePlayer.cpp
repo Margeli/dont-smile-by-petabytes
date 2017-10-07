@@ -333,7 +333,10 @@ update_status ModulePlayer::Update()
 			estela_time = SDL_GetTicks();
 		}
 
+
 		App->render->Blit(graphics, position.x, position.y, &(current_animation->GetCurrentFrame()));
+
+
 
 		
 		// Draw UI (score) --------------------------------------

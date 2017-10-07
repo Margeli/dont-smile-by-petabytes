@@ -27,6 +27,9 @@ private:
 	uint score_points;
 	void Dead(Collider* shooter, int num_enemy);
 
+	int maxLife = 200;
+	int currentLife = 0;
+
 	void OnCollision(Collider* collider, int num_enemy);
 
 	Particle explosion;
