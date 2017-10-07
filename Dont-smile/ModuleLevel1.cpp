@@ -133,7 +133,7 @@ update_status ModuleLevel1::Update()
 	if (jumped) {
 
 		App->player->win_chain++;
-	
+
 	}
 
 
@@ -174,25 +174,25 @@ update_status ModuleLevel1::Update()
 >>>>>>> 3e103628f5c7ff2c13315f9d3328defd588d2993
 
 		scroll_speed = 0;
- 		boss_music = App->audio->Load_Music("Assets/Audio/Boss_Music.ogg");
+		boss_music = App->audio->Load_Music("Assets/Audio/Boss_Music.ogg");
 		if (!boss_music) {
 			LOG("Error loading boss music: %s", Mix_GetError)
 		}*/
 		/*App->audio->Play_Music(boss_music);
 		App->player->spaceship_speed = 0;
 <<<<<<< HEAD
-		/*if (App->player2->IsEnabled) 
+		/*if (App->player2->IsEnabled)
 			App->player2->spaceship_speed = 0;*/
 
-		if (App->player2->IsEnabled()) 
+		if (App->player2->IsEnabled())
 			App->player2->spaceship_speed = 0;
-		
-	//}
 
-	//---------------
+		//}
 
-	
+		//---------------
 
+
+	}
 
 	return UPDATE_CONTINUE;
 }
