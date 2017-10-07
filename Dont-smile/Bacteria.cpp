@@ -14,28 +14,23 @@
 
 Bacteria::Bacteria(int x, int y, int count) : Enemy(x, y)
 {
-	sprite_path = App->textures->Load("Assets/Images/Bonus_Spaceship.png");
+	sprite_path = App->textures->Load("Assets/Images/Raiden_Spaceship.png");
 
 	explosion.anim.PushBack({ 0, 466, 77, 68 });
 	
 	
 	
-	idle.PushBack({ 45, 29,64,65 });
-	idle.PushBack({ 114,29,64,65 });
-	idle.PushBack({ 183,29,64,65 });
-	idle.PushBack({ 252,29,64,65 });
-	idle.PushBack({ 318,29,64,65 });
-	idle.PushBack({ 252,29,64,65 });
-	idle.PushBack({ 183,29,64,65 });
-	idle.PushBack({ 114,29,64,65 });
-	idle.PushBack({ 45, 29,64,65 });
+	idle.PushBack({ 0, 871,181,497 });
+	idle.PushBack({ 181, 871,181,497 });
+	idle.PushBack({ 362, 871,181,497 });
+	idle.PushBack({ 543, 871,181,497 });
 
 	
 	
-	animation = &forward;
-	idle.speed = 0.03f;
+	animation = &idle;
+	idle.speed = 0.1f;
 	speed = 3;
-	collider = App->collision->AddCollider({ 0, 0, 64, 65 }, COLLIDER_TYPE::COLLIDER_ENEMY, (Module*)App->enemies);
+	collider = App->collision->AddCollider({ 0, 0, 179, 495 }, COLLIDER_TYPE::COLLIDER_ENEMY, (Module*)App->enemies);
 
 	
 	

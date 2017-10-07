@@ -95,7 +95,7 @@ bool ModuleLevel1::Start()
 	
 	graphics = App->textures->Load("Assets/Images/lvl1_tilemap.png");
 
-	spawn_distance = 900;
+	spawn_distance = 1200;
 
 	
 	last_spawn_sinus = SDL_GetTicks();
@@ -223,7 +223,7 @@ void ModuleLevel1::SinusBacteriaSpawning(uint win_chain, float pos_x, float pos_
 
 	difficulty_time = win_chain * 150;	
 
-	Uint32 spawntime_sinus=2500;
+	Uint32 spawntime_sinus=3500;
 	counter_spawn_timer = SDL_GetTicks() - last_spawn_sinus;
 
 	if ((spawntime_sinus - difficulty_time) < counter_spawn_timer) {
@@ -233,7 +233,7 @@ void ModuleLevel1::SinusBacteriaSpawning(uint win_chain, float pos_x, float pos_
 		last_spawn_sinus = SDL_GetTicks();
 	}
 
-	Uint32 spawntime_bacteria = 1500;
+	Uint32 spawntime_bacteria = 2500;
 	counter_spawn_timer = SDL_GetTicks() - last_spawn_bacteria;
 
 	if ((spawntime_bacteria - difficulty_time) < counter_spawn_timer) {
