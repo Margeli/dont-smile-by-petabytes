@@ -101,8 +101,9 @@ bool ModuleLevel1::Start()
 	last_spawn_sinus = SDL_GetTicks();
 	last_spawn_bacteria = SDL_GetTicks();
 	srand(time(NULL));
+
 	
-	/*App->enemies->AddEnemy(SINUS, 600, 300);
+	/*App->enemies->AddEnemy(SINUS, 300, -5400);/*
 	App->enemies->AddEnemy(BACTERIA, 600, 350);*/
 
 	CreatePelitos();
@@ -147,7 +148,7 @@ void ModuleLevel1::scroll()
 		inferior_limit -= scroll_speed;
 		counter_sc_spd = 0;
 	}
-
+	
 	//if (counter_sc_spd > max_sc_sp) {
 	//	inferior_limit -= scroll_speed;
 	//	counter_sc_spd = 0;
@@ -163,9 +164,16 @@ void ModuleLevel1::scroll()
 // Update: draw background
 update_status ModuleLevel1::Update()
 {
-	SinusBacteriaSpawning(App->player->win_chain, App->player->position.x, App->player->position.y, spawn_distance);
+	if (App->player->position.y >= -5000) {
+		SinusBacteriaSpawning(App->player->win_chain, App->player->position.x, App->player->position.y, spawn_distance);
+	}
 	
-	if (jumped) {
+	if (App->player->position.y >= -4000) {
+		jumped = true;
+	}
+		
+		
+		if (jumped) {
 
 		App->player->win_chain++;
 		
@@ -223,7 +231,7 @@ void ModuleLevel1::SinusBacteriaSpawning(uint win_chain, float pos_x, float pos_
 
 	difficulty_time = win_chain * 150;	
 
-	Uint32 spawntime_sinus=3500;
+	Uint32 spawntime_sinus=3000;
 	counter_spawn_timer = SDL_GetTicks() - last_spawn_sinus;
 
 	if ((spawntime_sinus - difficulty_time) < counter_spawn_timer) {
@@ -233,7 +241,7 @@ void ModuleLevel1::SinusBacteriaSpawning(uint win_chain, float pos_x, float pos_
 		last_spawn_sinus = SDL_GetTicks();
 	}
 
-	Uint32 spawntime_bacteria = 2500;
+	Uint32 spawntime_bacteria = 4500;
 	counter_spawn_timer = SDL_GetTicks() - last_spawn_bacteria;
 
 	if ((spawntime_bacteria - difficulty_time) < counter_spawn_timer) {
@@ -255,7 +263,7 @@ void ModuleLevel1::CreatePelitos()
 {
 	int x_pelito; 
 	int y_pelito;
-	for (int i = -1000; i > -6000; i -= 400) {
+	for (int i = -1000; i > -4400; i -= 400) {
 		x_pelito = (rand() % 1800) + 200;
 		y_pelito = rand() % 100;
 		App->enemies->AddEnemy(PELITO, x_pelito, i + y_pelito);

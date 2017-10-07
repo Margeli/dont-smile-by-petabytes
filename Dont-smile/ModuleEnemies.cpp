@@ -15,6 +15,7 @@
 #include "CannonTank.h"
 #include "StaticCannon.h"
 #include "Boss.h"
+#include "ModuleLevel1.h"
 #include"BossCannon.h"
 #include "Bacteria.h"
 #include"BossCannon2.h"
@@ -23,7 +24,7 @@
 
 
 
-#define SPAWN_MARGIN 200
+#define SPAWN_MARGIN 400
 
 
 ModuleEnemies::ModuleEnemies()
@@ -90,13 +91,14 @@ update_status ModuleEnemies::PostUpdate()
 	for (uint i = 0; i < MAX_ENEMIES; ++i)
 	{
 		if (enemies[i] != nullptr)
+			//if (-App->level1->inferior_limit<enemies[i]->position.y*SCREEN_SIZE) {//dw
+			//	LOG("DeSpawning enemy at %d", enemies[i]->position.y);
+			//	delete enemies[i];
+			//	enemies[i] = nullptr;
+			//
+			//}
 		{
-			if (App->render->camera.y+(-SCREEN_HEIGHT-SPAWN_MARGIN)*SCREEN_SIZE>-enemies[i]->position.y*SCREEN_SIZE)
-			{
-				LOG("DeSpawning enemy at %d", enemies[i]->position.y );
-				delete enemies[i];
-				enemies[i] = nullptr;
-			}
+			
 		}
 	}
 
@@ -158,6 +160,16 @@ void ModuleEnemies::SpawnEnemy(const EnemyInfo& info)
 			enemies[i] = new Bacteria(info.x, info.y, info.shots);
 			break;
 
+		case ENEMY_TYPES::PELITO:
+			enemies[i] = new Pelito(info.x, info.y);
+			break;
+
+		case ENEMY_TYPES::SINUS:
+			enemies[i] = new Sinus(info.x, info.y, info.shots);
+			break;
+
+		
+
 		case ENEMY_TYPES::GREENSHOOTER_SPACESHIP:
 			enemies[i] = new GreenShooter_Spaceship(info.x, info.y, info.shots);
 			break;
@@ -197,18 +209,13 @@ void ModuleEnemies::SpawnEnemy(const EnemyInfo& info)
 			enemies[i] = new BossCannon(info.x, info.y, info.shots);
 			break;
 
-		case ENEMY_TYPES::SINUS:
-			enemies[i] = new Sinus(info.x, info.y, info.shots);
-			break;
+		
 
 		case ENEMY_TYPES::BOSS_CANNON2:
 			enemies[i] = new BossCannon2(info.x, info.y, info.shots);
 			break;
 
-		case ENEMY_TYPES::PELITO:
-			enemies[i] = new Pelito(info.x, info.y);
-			break;
-
+		
 		}
 	}
 }
