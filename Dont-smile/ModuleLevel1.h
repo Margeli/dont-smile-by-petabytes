@@ -31,7 +31,16 @@ public:
 	SDL_Rect ship_launcher;
 	bool fading = false;
 	int scroll_speed;
+
+	void SinusBacteriaSpawning(uint win_chain, float pos_x, float pos_y, int spawn_margin );
+
 	bool jumped = false;
+	int spawn_distance;
+
+	Uint32 last_spawn_sinus=0;
+	Uint32 last_spawn_bacteria = 0;
+	Uint32 counter_spawn_timer;
+	Uint32 difficulty_time;
 	
 	float foreground_pos;
 	bool first_animation=false;

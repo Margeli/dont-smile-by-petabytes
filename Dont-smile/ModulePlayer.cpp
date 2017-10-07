@@ -99,7 +99,7 @@ bool ModulePlayer::Start()
 	//	}. -> Pcs
 
 	if (spaceship_collider==nullptr)
-	spaceship_collider = App->collision->AddCollider({ 0,0, 145, 150 }, COLLIDER_PLAYER, this);
+	spaceship_collider = App->collision->AddCollider({ 0,0, 145, 150 }, COLLIDER_BOX, this);//COLLIDER_PLAYER
 
 	total_bombs = 3;
 	bomb_thrown = 0;

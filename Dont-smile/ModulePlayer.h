@@ -61,6 +61,7 @@ public:
 
 	uint win_chain;
 	
+	
 
 
 
