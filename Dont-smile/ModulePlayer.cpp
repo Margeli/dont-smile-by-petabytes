@@ -185,7 +185,7 @@ void ModulePlayer::applyInertia()
 // Update: draw background
 update_status ModulePlayer::Update()
 {
-	App->level1->scroll();
+
 
 	applyInertia();
 	if (!App->level1->first_animation) {// not able to move during first animation
@@ -346,9 +346,11 @@ update_status ModulePlayer::Update()
 
 		estela.scale -= 0.0000000000001f;
 
-
+		App->level1->scroll();
 
 		App->render->Blit(graphics, estela.position.x, estela.position.y, &estela.section, 0);
+
+		
 
 		return UPDATE_CONTINUE;
 	}

@@ -46,9 +46,9 @@ public:
 	bool forward;
 
 	int counter_sc_spd= 0;
-	int max_sc_sp = 2;
-	float scroll_speed = 5;
-	double inferior_limit = -1000;
+	int max_sc_sp = 1;
+	float scroll_speed = 1;
+	double inferior_limit = 200;
 
 	void scroll();
 

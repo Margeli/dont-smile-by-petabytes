@@ -208,12 +208,6 @@ update_status ModuleLevel1::Update()
 			App->player2->spaceship_speed = 0;
 	}
 
-
-
-
-
-
-
 	return UPDATE_CONTINUE;
 }
 
@@ -249,28 +243,6 @@ void ModuleLevel1::SinusBacteriaSpawning(uint win_chain, float pos_x, float pos_
 	}
 
 
-
-	//	
-	//	1250-(win_chain*150);//starts to 2s and ends at 1s ratio spawning
-	//counter_spawn_timer= SDL_GetTicks()-last_spawn;//current time-lvl1 creation time =time since level 1 starts spawning   time_level_creation
-	//int index;
-	//if (difficulty_time < counter_spawn_timer) {
-	//	index = rand() % 100;
-	//	if (index < 70) {//70%
-	//		App->enemies->AddEnemy(PELITO, x, y);
-
-	//	}
-	//	else if (index >= 70 && index > 85) {//15%
-	//		App->enemies->AddEnemy(BACTERIA, x, y);
-	//	}
-	//	else if (index<=85) //15%
-	//	{
-	//		App->enemies->AddEnemy(SINUS, x, y);
-	//	}
-	//	index = 0;
-	//	counter_spawn_timer = 0; //reestart timer
-	//	last_spawn = SDL_GetTicks();
-	//}
 }
 
 
