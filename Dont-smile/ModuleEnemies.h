@@ -58,6 +58,8 @@ public:
 
 	Enemy* enemies[MAX_ENEMIES];
 
+	SDL_Texture* sprite_path_opt;
+
 private:
 
 	void SpawnEnemy(const EnemyInfo& info);

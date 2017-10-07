@@ -12,11 +12,11 @@
 Sinus::Sinus(int x, int y, int shoot_num) : Enemy(x, y)
 {
 	
-	sprite_path = App->textures->Load("Assets/Images/Raiden_Spaceship.png");
 
-	if (sprite_path == nullptr) {
+	if (App->enemies->sprite_path_opt == nullptr) {
 		LOG("Error loading GreenShooter's textures. SDL Error: %s", SDL_GetError());
 	}
+	sprite_path = App->enemies->sprite_path_opt;
 
 	idle.PushBack({ 9,232,87,86 });
 	idle.PushBack({ 97,232,87,86 });
@@ -31,27 +31,28 @@ Sinus::Sinus(int x, int y, int shoot_num) : Enemy(x, y)
 	
 }
 
+
 void Sinus::Move() {
 	
 	
-	speed = 3.0f;
-	if (to_negative) {
-		iterator -= 0.05f;
-		if (iterator == -1.0f) {
-			to_negative = false;
-		}
-	
-	}
-	else {
-		iterator += 0.1f;
-		if (iterator == 1.0f) {
-			to_negative = true;
-		}
-	
-	}
-	animation = &idle;
-		position.y += speed;
-		position.x +=10* sin(iterator);
+	//speed = 3.0f;
+	//if (to_negative) {
+	//	iterator -= 0.05f;
+	//	if (iterator == -1.0f) {
+	//		to_negative = false;
+	//	}
+	//
+	//}
+	//else {
+	//	iterator += 0.1f;
+	//	if (iterator == 1.0f) {
+	//		to_negative = true;
+	//	}
+	//
+	//}
+	//animation = &idle;
+	//	position.y += speed;
+	//	position.x +=10* sin(iterator);
 
 }
 

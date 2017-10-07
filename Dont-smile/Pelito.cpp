@@ -20,11 +20,13 @@ Pelito::Pelito(int x, int y) : Enemy(x, y)
 	explosion.life = 1000;
 	explosion.anim.loop = false;
 
-	sprite_path = App->textures->Load("Assets/Images/Raiden_Spaceship.png");
+
 	//GreenShooter Spaceship animations
-	if (sprite_path == nullptr) {
+	if (App->enemies->sprite_path_opt == nullptr) {
 		LOG("Error loading GreenShooter's textures. SDL Error: %s", SDL_GetError());
 	}
+
+	sprite_path = App->enemies->sprite_path_opt;
 
 	idle.PushBack({ 0, 561,179,274 });//box sprite
 	idle.PushBack({ 179, 561,179,274 });

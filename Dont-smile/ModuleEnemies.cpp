@@ -48,7 +48,7 @@ bool ModuleEnemies::Start()
 	if (sprites == nullptr) {
 		LOG("Error loading enemy's sprites.");
 	}*/
-	
+	sprite_path_opt = App->textures->Load("Assets/Images/Raiden_Spaceship.png");
 	return true;
 }
 
@@ -101,7 +101,7 @@ update_status ModuleEnemies::PostUpdate()
 
 			if (App->render->camera.y + (-SCREEN_HEIGHT - SPAWN_MARGIN)*SCREEN_SIZE > -enemies[i]->position.y*SCREEN_SIZE)
 			{
-				LOG("DeSpawning enemy at %d", enemies[i]->position.y);
+			LOG("DeSpawning enemy at %d", enemies[i]->position.y);
 				delete enemies[i];
 				enemies[i] = nullptr;
 

@@ -14,7 +14,7 @@
 
 Bacteria::Bacteria(int x, int y, int count) : Enemy(x, y)
 {
-	sprite_path = App->textures->Load("Assets/Images/Raiden_Spaceship.png");
+	sprite_path = App->enemies->sprite_path_opt;
 
 	explosion.anim.PushBack({ 0, 466, 77, 68 });
 	
