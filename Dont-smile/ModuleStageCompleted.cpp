@@ -21,8 +21,8 @@ ModuleStageCompleted::ModuleStageCompleted()
 
 	background.x = 0;
 	background.y = 0;
-	background.w = 224;
-	background.h = 256;
+	background.w = 1280;
+	background.h = 720;
 
 }
 
