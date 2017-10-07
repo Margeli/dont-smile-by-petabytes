@@ -69,6 +69,8 @@ bool ModulePlayer::Start()
 		ret = false;
 	}
 	spaceship_speed = 1;
+
+	win_chain = 0;
 	
 	if (App->player2->player2==false) { 
 
@@ -107,39 +109,72 @@ bool ModulePlayer::Start()
 	return ret;
 }
 
+void ModulePlayer::check_map_limits()
+{
+	
+
+	if (position.x < 10 + map_margin)  //LEFT
+		position.x = 10 + map_margin;
+
+	if (position.x >(MAP1_WIDTH - 170) -map_margin) //RIGhT
+		position.x = (MAP1_WIDTH - 170) - map_margin;
+
+	if (position.y < -MAP1_HEIGHT + (SCREEN_HEIGHT+20) + map_margin)
+		position.y = (-MAP1_HEIGHT + (SCREEN_HEIGHT + 20)) + map_margin;
+
+	if (position.y > (400) - map_margin)
+		position.y = (400) - map_margin;
+
+}
+
+void ModulePlayer::move_camera_with_player()
+{
+	if ((App->render->camera.x + position.x) < +map_margin)  //Camera Left
+		App->render->camera.x = -position.x + map_margin;
+
+	if ((position.x) > ((SCREEN_WIDTH - 150) - App->render->camera.x)  - map_margin)  //Camera Right
+		App->render->camera.x = -(position.x - (SCREEN_WIDTH - 150) ) - map_margin;
+
+	if ((App->render->camera.y + position.y) < map_margin)  //Camera UP
+		App->render->camera.y = -position.y + map_margin;
+
+	if ((position.y) > ((SCREEN_HEIGHT - 150) - App->render->camera.y) - map_margin)  //Camera Down
+		App->render->camera.y = -(position.y - (SCREEN_HEIGHT - 150)) - map_margin;
+}
+
 void ModulePlayer::updatePosition()
 {
 	
-	position.x += speed_vec.x;
-	position.y -= speed_vec.y;
+	position.x += acceleration_vec.x;
+	position.y -= acceleration_vec.y;
 	
 }
 
 void ModulePlayer::applyInertia()
 {
-	if (speed_vec.y > 0 && speed_vec.y < friction) {
-		speed_vec.y = 0;
+	if (acceleration_vec.y > 0 && acceleration_vec.y < friction) {
+		acceleration_vec.y = 0;
 	}
-	else if (speed_vec.y < 0 && speed_vec.y > friction) {
-		speed_vec.y = 0;
+	else if (acceleration_vec.y < 0 && acceleration_vec.y > friction) {
+		acceleration_vec.y = 0;
 	}
-	else if (speed_vec.y > 0) {
-		speed_vec.y -= friction;
+	else if (acceleration_vec.y > 0) {
+		acceleration_vec.y -= friction;
 	}
-	else if (speed_vec.y < 0) {
-		speed_vec.y += friction;
+	else if (acceleration_vec.y < 0) {
+		acceleration_vec.y += friction;
 	}
-	if (speed_vec.x > 0 && speed_vec.x < friction) {
-		speed_vec.x = 0;
+	if (acceleration_vec.x > 0 && acceleration_vec.x < friction) {
+		acceleration_vec.x = 0;
 	}
-	else if (speed_vec.x < 0 && speed_vec.x > friction) {
-		speed_vec.x = 0;
+	else if (acceleration_vec.x < 0 && acceleration_vec.x > friction) {
+		acceleration_vec.x = 0;
 	}
-	else if (speed_vec.x > 0) {
-		speed_vec.x -= friction;
+	else if (acceleration_vec.x > 0) {
+		acceleration_vec.x -= friction;
 	}
-	else if (speed_vec.x < 0) {
-		speed_vec.x += friction;
+	else if (acceleration_vec.x < 0) {
+		acceleration_vec.x += friction;
 	}
 }
 
@@ -157,8 +192,8 @@ update_status ModulePlayer::Update()
 		else if (App->input->keyboard[SDL_SCANCODE_S] == KEY_STATE::KEY_REPEAT || App->input->gamepad[1] == KEY_STATE::KEY_REPEAT) //---DOWN
 		{
 			
-			if (speed_vec.y > -max_speed && speed_vec.y < max_speed)
-				speed_vec.y -= acceleration;
+			if (acceleration_vec.y > -max_speed && acceleration_vec.y < max_speed)
+				acceleration_vec.y -= acceleration;
 			updatePosition();
 			//App->render->camera.y += 4;
 
@@ -166,8 +201,8 @@ update_status ModulePlayer::Update()
 		}
 		else if (App->input->keyboard[SDL_SCANCODE_W] == KEY_STATE::KEY_REPEAT || App->input->gamepad[0] == KEY_STATE::KEY_REPEAT)//---UP
 		{
-			if (speed_vec.y > -max_speed && speed_vec.y < max_speed)
-				speed_vec.y += acceleration;
+			if (acceleration_vec.y > -max_speed && acceleration_vec.y < max_speed)
+				acceleration_vec.y += acceleration;
 			updatePosition();
 			//App->render->camera.y -= camera_speed_module;
 		}
@@ -184,16 +219,16 @@ update_status ModulePlayer::Update()
 		}
 		else if (App->input->keyboard[SDL_SCANCODE_D] == KEY_STATE::KEY_REPEAT || App->input->gamepad[2] == KEY_STATE::KEY_REPEAT)//---RIGHT
 		{
-			if (speed_vec.x > -max_speed && speed_vec.x < max_speed)
-			speed_vec.x += acceleration;
+			if (acceleration_vec.x > -max_speed && acceleration_vec.x < max_speed)
+			acceleration_vec.x += acceleration;
 			updatePosition();
 			//App->render->camera.x -= camera_speed_module;
 		}
 		else if (App->input->keyboard[SDL_SCANCODE_A] == KEY_STATE::KEY_REPEAT || App->input->gamepad[3] == KEY_STATE::KEY_REPEAT)//---LEFT
 
 		{
-			if (speed_vec.x > -max_speed && speed_vec.x < max_speed)
-			speed_vec.x -= acceleration;
+			if (acceleration_vec.x > -max_speed && acceleration_vec.x < max_speed)
+			acceleration_vec.x -= acceleration;
 			updatePosition();
 			//App->render->camera.x += 4;
 		}
@@ -209,25 +244,25 @@ update_status ModulePlayer::Update()
 
 		}
 
-		if ((App->input->keyboard[SDL_SCANCODE_B] == KEY_STATE::KEY_DOWN || App->input->gamepad[8] == KEY_STATE::KEY_REPEAT) && total_bombs > 0 && SDL_GetTicks() - last_bomb > 5000) //-----BOMB! (only when ur player has bombs and passed 5s from the last bomb)
-		{
-			bomb_thrown = SDL_GetTicks();
-			App->particles->AddParticle(bomb, position.x + 8, position.y, COLLIDER_EXPLOSION, 0, "Assets/Audio/Fx_Drop_Bomb");
-			saved_position = position;
-			total_bombs--;
-			last_bomb = SDL_GetTicks();
-		}
-		if (bomb_thrown != 0 && SDL_GetTicks() - bomb_thrown > 1300) {// 1.3s to generate the explosion of the bomb(damaging collider)
-			App->particles->AddParticle(bomb_explosion, saved_position.x - 70, saved_position.y - 250, COLLIDER_BOMB, 0, "Assets/Audio/Fx_Bomb_Explosion");
-			bomb_thrown = 0;
-			bomb_life = SDL_GetTicks();
-			saved_position = { 0,0 };
+		//if ((App->input->keyboard[SDL_SCANCODE_B] == KEY_STATE::KEY_DOWN || App->input->gamepad[8] == KEY_STATE::KEY_REPEAT) && total_bombs > 0 && SDL_GetTicks() - last_bomb > 5000) //-----BOMB! (only when ur player has bombs and passed 5s from the last bomb)
+		//{
+		//	bomb_thrown = SDL_GetTicks();
+		//	App->particles->AddParticle(bomb, position.x + 8, position.y, COLLIDER_EXPLOSION, 0, "Assets/Audio/Fx_Drop_Bomb");
+		//	saved_position = position;
+		//	total_bombs--;
+		//	last_bomb = SDL_GetTicks();
+		//}
+		//if (bomb_thrown != 0 && SDL_GetTicks() - bomb_thrown > 1300) {// 1.3s to generate the explosion of the bomb(damaging collider)
+		//	App->particles->AddParticle(bomb_explosion, saved_position.x - 70, saved_position.y - 250, COLLIDER_BOMB, 0, "Assets/Audio/Fx_Bomb_Explosion");
+		//	bomb_thrown = 0;
+		//	bomb_life = SDL_GetTicks();
+		//	saved_position = { 0,0 };
 
-		}
-		if (bomb_life != 0 && SDL_GetTicks() - bomb_life > 3000) {// bomb life 3s then delete particle
-			bomb_life = 0;
-			bomb_explosion.to_delete;
-		}
+		//}
+		//if (bomb_life != 0 && SDL_GetTicks() - bomb_life > 3000) {// bomb life 3s then delete particle
+		//	bomb_life = 0;
+		//	bomb_explosion.to_delete;
+		//}
 
 
 
@@ -258,7 +293,7 @@ update_status ModulePlayer::Update()
 
 		}
 
-
+		
 
 		if (spaceship_collider != nullptr)
 			spaceship_collider->SetPos(position.x+5, position.y);
@@ -286,6 +321,13 @@ update_status ModulePlayer::Update()
 		if (godmode) {
 			App->fonts->BlitText(0, 1, yellow_font_score, godmode_activated);// Yellow "G" in left upper corner when godmode activated.
 		}
+
+
+		move_camera_with_player();
+
+		check_map_limits();
+
+		LOG("%d",App->render->camera.x)
 
 		return UPDATE_CONTINUE;
 	}

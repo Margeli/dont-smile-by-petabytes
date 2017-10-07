@@ -63,7 +63,7 @@ bool ModuleLevel1::Start()
 
 	if (App->player2->player2 == false) {
 
-		App->player->position.x = 111; //position if there's only 1 player
+		App->player->position.x = App->player->map_margin + 50; //position if there's only 1 player
 		App->player->position.y = 150;
 	}
 	else {
@@ -94,7 +94,8 @@ bool ModuleLevel1::Start()
 	
 	graphics = App->textures->Load("Assets/Images/lvl1_tilemap.png");
 	
-	App->enemies->AddEnemy(SINUS, 500, 150);
+	App->enemies->AddEnemy(SINUS, 600, 300);
+	App->enemies->AddEnemy(BACTERIA, 600, 350);
 
 	return true;
 }
@@ -126,17 +127,17 @@ bool ModuleLevel1::CleanUp()
 // Update: draw background
 update_status ModuleLevel1::Update()
 {
-	if (App->render->camera.y <= 0)
-		App->render->camera.y = 0;
 
-	if (App->render->camera.y > 6399)
-		App->render->camera.y = 6399;
 
-	if (App->render->camera.x > 00)
-		App->render->camera.x = 0;
 
-	if (App->render->camera.x <= -1000)
-		App->render->camera.x = -1000;
+	if (jumped) {
+
+		App->player->win_chain++;
+
+	}
+
+
+
 
 	//if (App->render->camera.y < 100) {
 	//	
@@ -166,35 +167,32 @@ update_status ModuleLevel1::Update()
 	//App->render->Blit(graphics, -50, -150, &ship_launcher, 1.8f);
 
 
-	if (App->player->position.y <= -2735) {
+
+	if (App->player->position.y <= -2735) {       //////////------------------------------------
+
+	/*if (App->player->position.y <= -2735) {
+>>>>>>> 3e103628f5c7ff2c13315f9d3328defd588d2993
 
 		scroll_speed = 0;
- 		boss_music = App->audio->Load_Music("Assets/Audio/Boss_Music.ogg");
+		boss_music = App->audio->Load_Music("Assets/Audio/Boss_Music.ogg");
 		if (!boss_music) {
 			LOG("Error loading boss music: %s", Mix_GetError)
-		}
+		}*/
 		/*App->audio->Play_Music(boss_music);
 		App->player->spaceship_speed = 0;
 <<<<<<< HEAD
-		/*if (App->player2->IsEnabled) 
+		/*if (App->player2->IsEnabled)
 			App->player2->spaceship_speed = 0;*/
 
-		if (App->player2->IsEnabled()) 
+		if (App->player2->IsEnabled())
 			App->player2->spaceship_speed = 0;
 
+		//}
+
+		//---------------
 
 
-	/*if (App->input->keyboard[SDL_SCANCODE_TAB] && fading == false) {
-	
-		App->fade->FadeToBlack(this, App->stageCompleted);
-		fading = true;
-		*/
-
-
-		
 	}
-
-
 
 	return UPDATE_CONTINUE;
 }

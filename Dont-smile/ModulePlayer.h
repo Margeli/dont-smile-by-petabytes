@@ -30,14 +30,7 @@ public:
 public:
 
 	Particle basic_shot;
-	Particle left_basic_shot;
-	Particle right_basic_shot;
-	Particle triple_shot;
-	Particle left_triple_shot;
-	Particle right_triple_shot;
-	Particle ext_left_triple_shot;
-	Particle ext_right_triple_shot;
-	Particle bomb;
+	
 
 	Particle misile_left;
 	Particle misile_mid;
@@ -58,6 +51,12 @@ public:
 	Particle bomb_explosion;
 	fPoint position;
 	fPoint saved_position;
+
+
+	uint win_chain;
+	
+
+
 
 	Collider* spaceship_collider;
 	bool destroyed = false;
@@ -90,7 +89,12 @@ public:
 	Mix_Chunk* fx_shoot = nullptr;
 	//////
 
-	vec_2d speed_vec = {0, 0};
+	vec_2d acceleration_vec = {0, 0};
+	vec_2d speed_vec = { 0,0 };
+
+	void check_map_limits();
+
+	void move_camera_with_player();
 
 	void updatePosition();
 
@@ -99,6 +103,8 @@ public:
 	const float acceleration = 0.5f;
 	const float max_speed = 5.0f;
 	const float friction = 0.1f;
+
+	const int map_margin = 200;
 
 	int counter = 0;
 	int max = 2;
