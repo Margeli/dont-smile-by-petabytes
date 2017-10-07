@@ -69,6 +69,8 @@ bool ModulePlayer::Start()
 		ret = false;
 	}
 	spaceship_speed = 1;
+
+	win_chain = 0;
 	
 	if (App->player2->player2==false) { 
 
@@ -240,25 +242,25 @@ update_status ModulePlayer::Update()
 
 		}
 
-		if ((App->input->keyboard[SDL_SCANCODE_B] == KEY_STATE::KEY_DOWN || App->input->gamepad[8] == KEY_STATE::KEY_REPEAT) && total_bombs > 0 && SDL_GetTicks() - last_bomb > 5000) //-----BOMB! (only when ur player has bombs and passed 5s from the last bomb)
-		{
-			bomb_thrown = SDL_GetTicks();
-			App->particles->AddParticle(bomb, position.x + 8, position.y, COLLIDER_EXPLOSION, 0, "Assets/Audio/Fx_Drop_Bomb");
-			saved_position = position;
-			total_bombs--;
-			last_bomb = SDL_GetTicks();
-		}
-		if (bomb_thrown != 0 && SDL_GetTicks() - bomb_thrown > 1300) {// 1.3s to generate the explosion of the bomb(damaging collider)
-			App->particles->AddParticle(bomb_explosion, saved_position.x - 70, saved_position.y - 250, COLLIDER_BOMB, 0, "Assets/Audio/Fx_Bomb_Explosion");
-			bomb_thrown = 0;
-			bomb_life = SDL_GetTicks();
-			saved_position = { 0,0 };
+		//if ((App->input->keyboard[SDL_SCANCODE_B] == KEY_STATE::KEY_DOWN || App->input->gamepad[8] == KEY_STATE::KEY_REPEAT) && total_bombs > 0 && SDL_GetTicks() - last_bomb > 5000) //-----BOMB! (only when ur player has bombs and passed 5s from the last bomb)
+		//{
+		//	bomb_thrown = SDL_GetTicks();
+		//	App->particles->AddParticle(bomb, position.x + 8, position.y, COLLIDER_EXPLOSION, 0, "Assets/Audio/Fx_Drop_Bomb");
+		//	saved_position = position;
+		//	total_bombs--;
+		//	last_bomb = SDL_GetTicks();
+		//}
+		//if (bomb_thrown != 0 && SDL_GetTicks() - bomb_thrown > 1300) {// 1.3s to generate the explosion of the bomb(damaging collider)
+		//	App->particles->AddParticle(bomb_explosion, saved_position.x - 70, saved_position.y - 250, COLLIDER_BOMB, 0, "Assets/Audio/Fx_Bomb_Explosion");
+		//	bomb_thrown = 0;
+		//	bomb_life = SDL_GetTicks();
+		//	saved_position = { 0,0 };
 
-		}
-		if (bomb_life != 0 && SDL_GetTicks() - bomb_life > 3000) {// bomb life 3s then delete particle
-			bomb_life = 0;
-			bomb_explosion.to_delete;
-		}
+		//}
+		//if (bomb_life != 0 && SDL_GetTicks() - bomb_life > 3000) {// bomb life 3s then delete particle
+		//	bomb_life = 0;
+		//	bomb_explosion.to_delete;
+		//}
 
 
 
@@ -289,7 +291,7 @@ update_status ModulePlayer::Update()
 
 		}
 
-
+		
 
 		if (spaceship_collider != nullptr)
 			spaceship_collider->SetPos(position.x+5, position.y);
@@ -334,50 +336,29 @@ update_status ModulePlayer::Update()
 void ModulePlayer::OnCollision(Collider* c1, Collider* c2)
 {
 	switch (c2->type) {
-	case COLLIDER_POWERUP_MEDAL:
-		//App->particles->AddParticle(bonus_medal, position.x + 9, position.y, COLLIDER_PLAYER, 0, "Assets/Audio/Fx_Medal_Bonus.wav");
-		score += 500;	
-		fx_shoot = App->audio->Load_Fx("Assets/Audio/Fx_Medal_Bonus.wav");
-			if (!fx_shoot) {
-				LOG("Error loading shoot's fx: %s", Mix_GetError)
-			}
-			App->audio->Play_Fx(fx_shoot);
-			
-		
-		break;
+	//case COLLIDER_POWERUP_MEDAL:
+	//	//App->particles->AddParticle(bonus_medal, position.x + 9, position.y, COLLIDER_PLAYER, 0, "Assets/Audio/Fx_Medal_Bonus.wav");
+	//	score += 500;	
+	//	fx_shoot = App->audio->Load_Fx("Assets/Audio/Fx_Medal_Bonus.wav");
+	//		if (!fx_shoot) {
+	//			LOG("Error loading shoot's fx: %s", Mix_GetError)
+	//		}
+	//		App->audio->Play_Fx(fx_shoot);
+	//		
+	//	
+	//	break;
 
-	case COLLIDER_POWERUP_BLUE:
-		Blue_Powerup_Lvl++;
-		if (Blue_Powerup_Lvl >= 5) {
-			Blue_Powerup_Lvl = 4;
-			score += 5000;
-		}
-		break;
-	case COLLIDER_POWERUP_R:
-		Red_Powerup_Lvl++;
-		if (Red_Powerup_Lvl >= 5) {
-			Red_Powerup_Lvl = 4;
-			score += 5000;
-		}
-		break;
-	case COLLIDER_POWERUP_M:
-		M_Powerup_Lvl++;
-		if (M_Powerup_Lvl >= 4) {
-			M_Powerup_Lvl = 3;
-			score += 5000;
-		}
-		break;
-	case COLLIDER_POWERUP_B:
-		total_bombs++;
-		if (total_bombs >= 6) {
-			total_bombs = 6;		
-		}
-		break;
+	//case COLLIDER_POWERUP_B:
+	//	total_bombs++;
+	//	if (total_bombs >= 6) {
+	//		total_bombs = 6;		
+	//	}
+	//	break;
 
-	case COLLIDER_ENEMY_SHOT :
+	/*case COLLIDER_ENEMY_SHOT :
 		if (c1 == spaceship_collider && destroyed == false && App->fade->IsFading() == false&&godmode==false) {
 			Dead();
-		}
+		}*/
 	case COLLIDER_ENEMY:
 		if (c1 == spaceship_collider && destroyed == false && App->fade->IsFading() == false && godmode==false ) {
 			Dead();
@@ -395,13 +376,13 @@ void ModulePlayer::Dead() {
 	sprintf_s(score_text, 10, "%8d", score);
 	sprintf_s(high_score_text, 10, "%7d", high_score);
 
-	if (App->player2->IsEnabled()) {
-		App->player2->Red_Powerup_Lvl = 0;
-		App->player2->M_Powerup_Lvl = 0;
-		App->player2->Blue_Powerup_Lvl = 0;
-		App->player2->destroyed = true;
-	
-	}
+	//if (App->player2->IsEnabled()) {
+	//	App->player2->Red_Powerup_Lvl = 0;
+	//	App->player2->M_Powerup_Lvl = 0;
+	//	App->player2->Blue_Powerup_Lvl = 0;
+	//	App->player2->destroyed = true;
+	//
+	//}
 	
 	destroyed = true;
 	

@@ -19,6 +19,8 @@ public:
 	update_status Update();
 	bool CleanUp();
 
+
+
 public:
 	
 	SDL_Texture* graphics = nullptr;
@@ -29,11 +31,14 @@ public:
 	SDL_Rect ship_launcher;
 	bool fading = false;
 	int scroll_speed;
-
+	bool jumped = false;
 	
 	float foreground_pos;
 	bool first_animation=false;
 	bool forward;
+
+	
+
 
 	
 };
