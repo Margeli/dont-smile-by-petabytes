@@ -131,8 +131,8 @@ void ModulePlayer::check_map_limits()
 	if (position.x < 10 + map_margin)  //LEFT
 		position.x = 10 + map_margin;
 
-	if (position.x >(MAP1_WIDTH - 170) -map_margin) //RIGhT
-		position.x = (MAP1_WIDTH - 170) - map_margin;
+	if (position.x >(MAP1_WIDTH - 370) -map_margin) //RIGhT
+		position.x = (MAP1_WIDTH - 370) - map_margin;
 
 	if (position.y < -MAP1_HEIGHT + (SCREEN_HEIGHT+20) + map_margin)
 		position.y = (-MAP1_HEIGHT + (SCREEN_HEIGHT + 20)) + map_margin;

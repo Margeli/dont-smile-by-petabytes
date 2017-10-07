@@ -66,7 +66,7 @@ bool ModuleLevel1::Start()
 	if (App->player2->player2 == false) {
 
 		App->player->position.x = App->player->map_margin + 50; //position if there's only 1 player
-		App->player->position.y = 150;
+		App->player->position.y = -350;
 	}
 	else {
 
