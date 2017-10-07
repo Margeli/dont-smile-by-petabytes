@@ -111,33 +111,35 @@ bool ModulePlayer::Start()
 
 void ModulePlayer::check_map_limits()
 {
+	
 
-	if (position.x < 10)
-		position.x = 10;
+	if (position.x < 10 + map_margin)  //LEFT
+		position.x = 10 + map_margin;
 
-	if (position.x >(MAP1_WIDTH - 170))
-		position.x = (MAP1_WIDTH - 170);
+	if (position.x >(MAP1_WIDTH - 170) -map_margin) //RIGhT
+		position.x = (MAP1_WIDTH - 170) - map_margin;
 
-	if (position.y < -MAP1_HEIGHT + (SCREEN_HEIGHT+20))
-		position.y = (-MAP1_HEIGHT + (SCREEN_HEIGHT + 20));
+	if (position.y < -MAP1_HEIGHT + (SCREEN_HEIGHT+20) + map_margin)
+		position.y = (-MAP1_HEIGHT + (SCREEN_HEIGHT + 20)) + map_margin;
 
-	//if (position.x >(MAP1_WIDTH - 170))
-	//	position.x = (MAP1_WIDTH - 170);
+	if (position.y > (400) - map_margin)
+		position.y = (400) - map_margin;
+
 }
 
 void ModulePlayer::move_camera_with_player()
 {
-	if ((App->render->camera.x + position.x) < 0)  //Camera Left
-		App->render->camera.x = -position.x;
+	if ((App->render->camera.x + position.x) < +map_margin)  //Camera Left
+		App->render->camera.x = -position.x + map_margin;
 
-	if ((position.x) > ((SCREEN_WIDTH - 150) - App->render->camera.x))  //Camera Right
-		App->render->camera.x = -(position.x - (SCREEN_WIDTH - 150));
+	if ((position.x) > ((SCREEN_WIDTH - 150) - App->render->camera.x)  - map_margin)  //Camera Right
+		App->render->camera.x = -(position.x - (SCREEN_WIDTH - 150) ) - map_margin;
 
-	if ((App->render->camera.y + position.y) < 0)  //Camera Left
-		App->render->camera.y = -position.y;
+	if ((App->render->camera.y + position.y) < map_margin)  //Camera UP
+		App->render->camera.y = -position.y + map_margin;
 
-	if ((position.y) > ((SCREEN_HEIGHT - 150) - App->render->camera.y))  //Camera Right
-		App->render->camera.y = -(position.y - (SCREEN_HEIGHT - 150));
+	if ((position.y) > ((SCREEN_HEIGHT - 150) - App->render->camera.y) - map_margin)  //Camera Down
+		App->render->camera.y = -(position.y - (SCREEN_HEIGHT - 150)) - map_margin;
 }
 
 void ModulePlayer::updatePosition()

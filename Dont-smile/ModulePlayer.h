@@ -104,6 +104,8 @@ public:
 	const float max_speed = 5.0f;
 	const float friction = 0.1f;
 
+	const int map_margin = 200;
+
 	int counter = 0;
 	int max = 2;
 	
